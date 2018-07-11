@@ -1,0 +1,33 @@
+laravel new Ecommerce							Crear proyecto
+php artisan make:auth							Crear vistas login
+composer require fzaninotto/faker				Instalar faker (para generar valores para poblar la bd)
+php artisan make:seeder PerfilSeeder			Crear seeder perfil para poblar la tabla perfil
+php artisan db:seed								Ejecutamos los seeder
+php artisan make:seeder UsuarioSeeder			Crear seeder usuario para poblar la tabla usuario
+php artisan make:seeder ClienteSeeder			Crear seeder cliente para poblar la tabla cliente
+php artisan make:model Usuario					Crea el modelo usuario para la tabla usuario
+php artisan migrate								Para crear la tabla de recuperacion de contraseña
+php artisan make:model Cliente					Para crear el modelo cliente
+php artisan make:controller ClienteController 	Para crear el controlador de cliente
+php artisan make:request ClienteRequest			Para recibir parametros y definir reglas de validacion
+php artisan make:model Region
+php artisan make:model Provincia
+php artisan make:model Comuna
+php artisan make:controller ComunaController
+composer require "laravelcollective/html":"^5.4.0"	Para Mejor manejo de formularios
+composer dump-autoload
+php artisan make:controller ProductoController
+php artisan make:model Producto
+php artisan make:request ProductoRequest
+php artisan make:model Categoria
+php artisan make:model SubCategoria
+php artisan make:controller CategoriaController
+php artisan make:controller SubCategoriaController
+php artisan make:model Imagen
+php artisan make:middleware AdminMiddeleware	Para crear un Middelware para retriccion de acceso a paginas
+php artisan make:middleware UserMiddeleware     Para crear un Middelware para retriccion de acceso a paginas
+php artisan make:model Perfil
+php artisan make:controller ImagenController
+php artisan make:model Especificacion
+php artisan make:controller EspecificacionController
+php artisan make:request EspecificacionRequest
