@@ -21,17 +21,19 @@
 	</div>
     <div class="row justify-content-center">
         <div class="col-md-12">
+        	@include('producto.fragment.error')
+			@include('producto.fragment.success')
 			<table class="table">
 				<thead class="thead-dark">
 				<tr>
 				  <th scope="col">Imagen</th>
-				  <th scope="col">Id</th>				  
+				  <th scope="col">Codigo</th>				  
 				  <th scope="col">Nombre</th>
 				  <th scope="col">Marca</th>
 				  <th scope="col">Modelo</th>
 				  <th scope="col">Precio</th>
 				  <th scope="col">Stock</th>
-				  <th scope="col"></th>
+				  <th scope="col" colspan="2"></th>
 				</tr>
 				</thead>
 				<tbody id="tbody">
@@ -56,24 +58,31 @@
 						<td>{{ $producto->modelo }}</td>
 						<td>{{ $producto->precio_normal }}</td>
 						<td>{{ $producto->stock }}</td>
-						<td width="160">
+						<td width="110px">
 							<a href="{{ route('producto.edit', [$producto->id]) }}" class="btn btn-warning bt-sm" title="Editar producto"><i class="far fa-edit"></i></a>
 						
 							<button type="button" class="btn btn-danger bt-sm" onclick="modalEliminarProducto({{ $producto->id }})"  title="Eliminar producto"><i class="far fa-trash-alt"></i></button>
-
-							<a href="" class="btn btn-success bt-sm"  title="Ofertas producto"><i class="fas fa-tags"></i></a>
+						</td>
+						<td width="55px">
+							<form action="{{ route('oferta.index') }}" method="GET">
+				                @csrf
+				                <input type="hidden" name="idProducto" value="{{ $producto->id }}">
+				                <button type="submit" class="btn btn-success bt-sm" title="Ofertas producto"><i class="fas fa-tags"></i></button>
+				            </form>
 						</td>
 					</tr>
 				@endforeach
 
 				</tbody>
 			</table>
+
+			<!-- Paginacion -->
+			{{ $productos->links() }}
         </div>
     </div>
 </div>
 
-<!-- Paginacion -->
-{{ $productos->links() }}
+
 
 
 @include('producto.modal.modalConfirmacionProducto')

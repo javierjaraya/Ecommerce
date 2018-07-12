@@ -62,9 +62,6 @@
 							<a href="{{ route('producto.index') }}" class="nav-link">Productos</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link">Ofertas</a>
-						</li>
-						<li class="nav-item">
 							<a class="nav-link">Ventas</a>
 						</li>
 						<li class="nav-item">

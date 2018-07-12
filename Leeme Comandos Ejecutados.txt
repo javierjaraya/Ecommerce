@@ -31,3 +31,6 @@ php artisan make:controller ImagenController
 php artisan make:model Especificacion
 php artisan make:controller EspecificacionController
 php artisan make:request EspecificacionRequest
+php artisan make:controller OfertaController
+php artisan make:model Oferta
+php artisan make:request OfertaRequest

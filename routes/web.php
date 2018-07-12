@@ -93,9 +93,9 @@ Route::resource('imagen', 'ImagenController')->middleware('admin');
 Route::get('marcarPrincipal/{id}','ImagenController@marcarPrincipal')->middleware('admin')->name('marcarPrincipal');
 /*
 |-------------------------------------------------------------------------
-| Rutas Contenedor Imagen
+| Rutas Contenedor Especificacion
 |-------------------------------------------------------------------------
-| especificacion.index 	GET|HEAD 	Muestra listado de especificaciones
+| especificacion.index 		GET|HEAD 	Muestra listado de especificaciones
 | especificacion.store  	POST 		Guardar especificacion
 | especificacion.create 	GET|HEAD 	Muestra formulario crear un especificacion
 | especificacion.show   	GET|HEAD 	Muestra un especificacion
@@ -106,3 +106,21 @@ Route::get('marcarPrincipal/{id}','ImagenController@marcarPrincipal')->middlewar
 Route::resource('especificacion', 'EspecificacionController')->middleware('admin');
 Route::GET('especificacion.editmodal','EspecificacionController@editModal')->middleware('admin')->name('especificacionEditModal');
 Route::GET('especificacion.removemodal','EspecificacionController@removeModal')->middleware('admin')->name('especificacionRemoveModal');
+
+/*
+|-------------------------------------------------------------------------
+| Rutas Contenedor Oferta
+|-------------------------------------------------------------------------
+| Oferta.index 		GET|HEAD 	Muestra listado de ofertas
+| Oferta.store  	POST 		Guardar oferta
+| Oferta.create 	GET|HEAD 	Muestra formulario crear una oferta
+| Oferta.show   	GET|HEAD 	Muestra una oferta
+| Oferta.update 	PUT|PATCH 	Guarda cambios editar
+| Oferta.destroy 	DELETE 		Elimina una oferta
+| Oferta.edit   	GET|HEAD 	Muestra formulario editar oferta
+*/
+Route::resource('oferta','OfertaController')->middleware('admin');
+Route::get('ofertas/{id}','OfertaController@index')->middleware('admin');
+Route::GET('oferta.removemodal','OfertaController@removeModal')->middleware('admin')->name('ofertaRemoveModal');
+
+
