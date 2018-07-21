@@ -198,4 +198,18 @@ class ProductoController extends Controller {
         return view('welcome')
         ->with('productos',$productos);
     }
+
+    public function productoSubCategoria($id){
+        $productos = DB::table('producto')
+            ->leftJoin('oferta','producto.id','=','oferta.id_producto')
+            ->join('imagen','producto.id','=','imagen.id_producto')
+            ->join('categoria','producto.id_subcategoria','=','categoria.id')
+            ->join('subcategoria','categoria.id','=','subcategoria.id')
+            ->where('imagen.es_principal','=','1')
+            ->where('subcategoria.id','=',$id)
+            ->get();
+            //
+        return view('welcome')
+        ->with('productos',$productos);
+    }
 }

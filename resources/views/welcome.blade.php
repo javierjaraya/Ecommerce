@@ -7,7 +7,12 @@
 			<div class="card" style="">
 				<div class="card-title text-right pr-1 mb-1">
 					<span class="badge badge-success">
-			    		Oferta {{ round(100-(100/$producto->precio_normal)*$producto->precio_oferta,0) }} %
+						@if ($producto->precio_oferta != null)
+							Oferta {{ round(100-(100/$producto->precio_normal)*$producto->precio_oferta,0) }} %
+						@else
+							Disponible
+						@endif
+
 			    	</span>
 			    </div>
 			    <a href="{{ route('producto.show', [$producto->id_producto] ) }}">
@@ -22,10 +27,16 @@
 			    <h5 class="card-title text-center"><a  href="{{ route('producto.show', [$producto->id_producto] ) }}">{{ $producto->nombre }}</a> 
 			    </h5>
 			    <p class="card-text text-center">
+			    	@if ($producto->precio_oferta != null)
 			    	<b style="font-size: 15px;">
 			    		<span class="text-success">$ {{ number_format($producto->precio_oferta) }}</span>
 			    	</b>
 			    	<span style="text-decoration: line-through; font-size: 10px;">$ {{ number_format($producto->precio_normal) }}</span>
+					@else
+						<b style="font-size: 15px;">
+			    		<span class="text-success">$ {{ number_format($producto->precio_normal) }}</span>
+			    	</b>
+					@endif
 			    </p>
 			  </div>
 			</div>

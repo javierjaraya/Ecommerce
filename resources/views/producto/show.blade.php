@@ -70,19 +70,31 @@
 			<h6>SKU {{ $producto->id }}</h6>
 		</div>
 		<div class="">
+			@if ($producto->precio_oferta != null)
 			<b style="font-size: 35px;">
 				<span class="text-success">$ {{ number_format($oferta->precio_oferta) }}</span>
 			</b>
 			<span style="text-decoration: line-through; font-size: 17px;">$ {{ number_format($producto->precio_normal) }}</span>
 			<hr>
+			@else
+			<b style="font-size: 35px;">
+				<span class="text-success">$ {{ number_format($producto->precio_normal) }}</span>
+			</b>
+			<br>
+			@endif
+			
+				
 			{{ $producto->descripcion }}
 
 		</div>
 
 		<div class="">
 			<form class="form-inline mt-3">
-
+			@if ($producto->precio_oferta != null)
 			<input type="number" class="form-control" min="0" max="{{ $oferta->stock }}" name="cantidad" value="1">
+			@else
+			<input type="number" class="form-control" min="0" max="{{ $producto->stock }}" name="cantidad" value="1">
+			@endif
 			<button type="button" class="btn btn-success ml-2"><i class="fas fa-shopping-cart"></i>  Añadir al carro</button>
 			</form>
 		</div>

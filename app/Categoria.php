@@ -15,4 +15,8 @@ class Categoria extends Model {
     protected $fillable = [
         'id', 'nombre'
     ];
+
+    public function subcategorias() {
+	   return $this->hasMany('App\SubCategoria','id_categoria');//(Tabla relacionada , columna señalada)
+	}
 }

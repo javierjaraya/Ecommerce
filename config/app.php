@@ -160,7 +160,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        /*
+        * Para cargar el menu a todas las vistas
+        */
+        App\Providers\ComposerServiceProvider::class,
     ],
 
     /*

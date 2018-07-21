@@ -13,7 +13,7 @@
     <title>{{ config('app.name', 'Ecommerce') }}</title>
 
     <!-- Scripts ESTA COMENTADO PARA PROBAR EL SELECT DE COMUNA EN MIS DATOS-->
-    <script src="{{ asset('') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 	<!-- Scripts para la galeria de fotos-->
@@ -166,84 +166,19 @@
 					
 						<div id="MainMenu">
 						  <div class="list-group">
-						      
-						    <a href="#menu1" class="list-group-item list-group-item-light collapsed" data-toggle="collapse" data-parent="#MainMenu">Dashboard</a>
-						    <div class="collapse" id="menu1">
-							      <a href="#" class="list-group-item">Style 1</a>
-							      <a href="#" class="list-group-item">Style 2</a>
-							      <a href="#" class="list-group-item">Style 3</a>
-						    </div>
 						    
-						    <a href="#menu2" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">UI Elements</a>
-						    <div class="collapse" id="menu2">
-						      <a href="" class="list-group-item" data-toggle="collapse" data-target="#menu2_a">Bootstrap Elements</a>
-						      <div class="collapse list-group-submenu" id="menu2_a">
-						        <a href="#" class="list-group-item" data-parent="#menu2_a"><i class="glyphicon glyphicon-flag"></i> Cards</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_a">Forms</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_a">Typography</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_a">Buttons</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_a">Alerts</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_a">Modals</a>
-						      </div>
-						      <a href="" class="list-group-item list-group-item-light" data-toggle="collapse" data-target="#menu2_b">Extra Widgets</a>
-						      <div class="collapse list-group-submenu" id="menu2_b">
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Label Blocks</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Pricing Tables</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Drag/Drop List</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Collapsible</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Profile Card</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Overflow Tabs</a>
-						        <a href="#" class="list-group-item" data-parent="#menu2_b">Notifications</a>
-						      </div>
+							@foreach ($categorias as $key => $categoria)
+							<a href="#menu{{ $key }}" class="list-group-item list-group-item-light collapsed" data-toggle="collapse" data-parent="#MainMenu">{{ $categoria->nombre }}</a>
+						    <div class="collapse" id="menu{{ $key }}">
+						    	@foreach ($categoria->subcategorias as $i => $subcategoria)
+									<a href="{{ route('productoSubCategoria',[$subcategoria->id]) }}" class="list-group-item">{{ $subcategoria->nombre }}</a>
+						    	@endforeach
 						    </div>
-						    
-						    <a href="#menu3" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Charts</a>
-						    <div class="collapse" id="menu3">
-						      <a href="#" class="list-group-item">Style 1</a>
-						    </div>
-						    
-						    <a href="#menu4" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Maps</a>
-						    <div class="collapse" id="menu4">
-						      <a href="#" class="list-group-item">Style 1</a>
-						    </div>
-						    
-						    <a href="#menu5" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Inbox</a>
-						    <div class="collapse" id="menu5">
-						      <a href="#" class="list-group-item">Style 1</a>
-						    </div>
-						    
-						    <a href="#menu9" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Calendar</a>
-						    <div class="collapse" id="menu9">
-						      <a href="#" class="list-group-item">Calendar</a>
-						    </div>
-						    
-						    <a href="#menu8" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Sample Pages</a>
-						    <div class="collapse" id="menu8">
-						      <a href="#" class="list-group-item">Login / Signup</a>
-						      <a href="" class="list-group-item list-group-item-light" data-toggle="collapse" data-target="#menu8_a">Error Pages</a>
-						      <div class="collapse list-group-submenu" id="menu8_a">
-						        <a href="#" class="list-group-item" data-parent="#menu8_a">404 Not Found</a>
-						        <a href="#" class="list-group-item" data-parent="#menu8_a">500 Error</a>
-						      </div>
-						      <a href="#" class="list-group-item">Contacts</a>
-						      <a href="#" class="list-group-item">Results List</a>
-						      <a href="#" class="list-group-item">User Profile</a>
-						      <a href="#" class="list-group-item">Timeline</a>
-						    </div>
-						    
-						    <a href="#menu6" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Gallery</a>
-						    <div class="collapse" id="menu6">
-						      <a href="#" class="list-group-item">Paged Thumbnails</a>
-						      <a href="#" class="list-group-item">Infinite Scroll</a>
-						    </div>
-						    
-						    <a href="#menu7" class="list-group-item list-group-item-light" data-toggle="collapse" data-parent="#MainMenu">Tasks</a>
-						    <div class="collapse" id="menu7">
-						      <a href="#" class="list-group-item">Style 1</a>
-						    </div>
+							@endforeach
+
 						    
 						  </div>
-					</div>
+						</div>
 
 					</aside>
 				</div>

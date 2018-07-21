@@ -74,6 +74,7 @@ Route::resource('cliente', 'ClienteController')->middleware('user');
 Route::resource('producto', 'ProductoController');
 Route::GET('producto.search','ProductoController@search')->middleware('admin')->name('searchProduct');
 Route::GET('producto.removemodal','ProductoController@removeModal')->middleware('admin')->name('productoRemoveModal');
+Route::get('producto/subcategoria/{id}','ProductoController@productoSubCategoria')->name('productoSubCategoria');
 
 /*
 |-------------------------------------------------------------------------
