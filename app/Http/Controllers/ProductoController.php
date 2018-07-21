@@ -11,6 +11,7 @@ use App\SubCategoria;//Incluye el modelo SubCategoria
 use App\Imagen;//Incluye el modelo Imagen
 use App\Especificacion;//Incluye el modelo Especificacion
 use Illuminate\Support\Facades\DB;//para acceder a la bd
+use Image;//Para redimensionar las imagenes a subir
 
 class ProductoController extends Controller {
     
@@ -49,9 +50,21 @@ class ProductoController extends Controller {
        		$nombre = $file->getClientOriginalName();
        		$foo = \File::extension($nombre);
        		$now = new \DateTime();
-			$fecha = $now->format('Y-m-d-H-i-s');
+			$fecha = $now->format('YmdHis');
 
-			$newNombre = $fecha.".".strtolower($foo);
+            $newNombre = $fecha."_".$i."_product.".strtolower($foo);
+
+            //$img = Image::make($file);
+            //$img->resize(240, 240);
+            //$ima->save(public_path('storage/thumbs/',$newNombre));
+            //imagejpeg($file, public_path('storage/thumbs/',$newNombre),90);
+            $image_info = imagecreatefromjpeg($file);
+            $ancho = imagesx($image_info);
+            $alto = imagesy($image_info);
+
+            $thumb = imagecreatetruecolor(65,65);
+            imagecopyresampled($thumb,$image_info,0,0,0,0,65,65,$ancho,$alto);
+            imagejpeg($thumb,"storage/thumbs/".$newNombre,90);
 
        		//indicamos que queremos guardar un nuevo archivo en el disco local
 	        \Storage::disk('local')->put($newNombre, \File::get($file));
@@ -119,6 +132,17 @@ class ProductoController extends Controller {
 
             $newNombre = $fecha."_".$i."_product.".strtolower($foo);
 
+            //Image::make($file)
+            //->resize(100,100)
+            //->save('storage/thumbs/',$newNombre);
+            $image_info = imagecreatefromjpeg($file);
+            $ancho = imagesx($image_info);
+            $alto = imagesy($image_info);
+
+            $thumb = imagecreatetruecolor(65,65);
+            imagecopyresampled($thumb,$image_info,0,0,0,0,65,65,$ancho,$alto);
+            imagejpeg($thumb,"storage/thumbs/".$newNombre,90);
+
             //indicamos que queremos guardar un nuevo archivo en el disco local
             \Storage::disk('local')->put($newNombre, \File::get($file));
             
@@ -145,10 +169,33 @@ class ProductoController extends Controller {
 
         DB::table('especificacion')->where('id_producto', '=', $requeest->id)->delete();
         DB::table('imagen')->where('id_producto', '=', $requeest->id)->delete();
+        DB::table('oferta')->where('id_producto', '=', $requeest->id)->delete();
 
         $producto->delete();
         return array(
             'success' => 'Producto eliminada correctamente', 
         );
+    }
+
+    public function show($id){
+        $producto = Producto::find($id);
+        $oferta = DB::table('oferta')->where('id_producto',$id )->first();
+        $especificaciones = DB::table('especificacion')->where('id_producto',$id )->get();
+
+        return view('producto.show')
+        ->with('producto',$producto)
+        ->with('oferta',$oferta)
+        ->with('especificaciones',$especificaciones);
+    }
+
+    public function productosOferta(){
+        $productos = DB::table('producto')
+            ->join('oferta','producto.id','=','oferta.id_producto')
+            ->join('imagen','producto.id','=','imagen.id_producto')
+            ->where('imagen.es_principal','=','1')
+            ->get();
+
+        return view('welcome')
+        ->with('productos',$productos);
     }
 }

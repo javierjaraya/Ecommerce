@@ -13,9 +13,7 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ProductoController@productosOferta');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -73,7 +71,7 @@ Route::resource('cliente', 'ClienteController')->middleware('user');
 | producto.destroy 	DELETE 		Elimina un producto
 | producto.edit   	GET|HEAD 	Muestra formulario editar producto
 */
-Route::resource('producto', 'ProductoController')->middleware('admin');
+Route::resource('producto', 'ProductoController');
 Route::GET('producto.search','ProductoController@search')->middleware('admin')->name('searchProduct');
 Route::GET('producto.removemodal','ProductoController@removeModal')->middleware('admin')->name('productoRemoveModal');
 

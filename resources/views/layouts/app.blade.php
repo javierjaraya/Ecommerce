@@ -13,7 +13,15 @@
     <title>{{ config('app.name', 'Ecommerce') }}</title>
 
     <!-- Scripts ESTA COMENTADO PARA PROBAR EL SELECT DE COMUNA EN MIS DATOS-->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('') }}" defer></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+	<!-- Scripts para la galeria de fotos-->
+    <script type="text/javascript" src="{{ asset('js/galeria/jquery.tmpl.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/galeria/jquery.easing.1.3.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/galeria/jquery.elastislide.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/galeria/gallery.js') }}"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -25,10 +33,25 @@
     <!-- Icons-->
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
+	<!-- CSS Galeria -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/galeria/reset.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/galeria/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/galeria/elastislide.css') }}" />
+	<noscript>
+        <style>
+            .es-carousel ul{
+                display:block;
+            }
+        </style>
+    </noscript>
+        
+
+
+
 <!-- PARA EL SELECT DE COMUNA Jquery da comflicto-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>	-->
 
 
 </head>
@@ -136,9 +159,9 @@
 				
 			</div>
 		</header>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-5 col-md-3">				
+				<div class="col-sm-2 col-md-2">				
 					<aside>
 					
 						<div id="MainMenu">
@@ -224,7 +247,7 @@
 
 					</aside>
 				</div>
-				<div class=" col-sm-9 co-md-10">
+				<div class=" col-sm-10 co-md-10">
 					<section>					
 
 					@yield('content')

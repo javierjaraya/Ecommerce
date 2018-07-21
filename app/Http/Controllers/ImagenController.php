@@ -15,6 +15,7 @@ class ImagenController extends Controller {
     	$id_producto = $imagen->id_producto;
 
         \Storage::disk('local')->delete($imagen->ruta);
+        \Storage::disk('local')->delete("thumbs/".$imagen->ruta);
         
     	$imagen->delete();
 

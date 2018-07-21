@@ -34,3 +34,4 @@ php artisan make:request EspecificacionRequest
 php artisan make:controller OfertaController
 php artisan make:model Oferta
 php artisan make:request OfertaRequest
+composer require intervention/image   			Instalar libreria para intervenir imagenes al subir
