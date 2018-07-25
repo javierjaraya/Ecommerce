@@ -4,65 +4,39 @@
 
 <div class="row">
 	<div class="col-md-6">
-		
-		@if($producto->imagenes->get(0) && false)
-			@foreach ($producto->imagenes as $imagen)
-				@if($imagen->es_principal == 1)
-					<img src="{{ asset('storage/'.$imagen->ruta ) }}" class="rounded float-left" alt="Card image cap" width="100%">
-				@endif								
-			@endforeach
-			
-		@else
-			@if (false)
-			<img src="{{ asset('img/no-imagen.png') }}" class="rounded float-left" alt="Card image cap" width="100%">
+		@if($producto->imagenes->get(0))
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		  <ol class="carousel-indicators">
+		  	<?php $i = 0; ?>
+		  	@foreach ($producto->imagenes as $imagen)
+		    <li data-target="#carouselExampleIndicators" data-slide-to="{{ $i++ }}" class="active"></li>
+		    @endforeach
+		  </ol>
+		  <div class="carousel-inner">
+		    <?php $i = 0; $active = "active"; ?>
+		    @foreach ($producto->imagenes as $imagen)
+		    @if ($i > 0)
+				<?php $active = ""; ?>
 			@endif
-		@endif
-
-		<script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">    
-            <div class="rg-image-wrapper">
-
-                    <div class="rg-image-nav">
-                        <a href="#" class="rg-image-nav-prev">Previous Image</a>
-                        <a href="#" class="rg-image-nav-next">Next Image</a>
-                    </div>
-
-                <div class="rg-image"></div>
-                <div class="rg-loading"></div>
-                <div class="rg-caption-wrapper">
-                    <div class="rg-caption" style="display:none;">
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-        </script>
-
-		<div id="rg-gallery" class="rg-gallery">
-		    <div class="rg-thumbs">
-		        <!-- Elastislide Carousel Thumbnail Viewer -->
-		        <div class="es-carousel-wrapper">
-		            <div class="es-carousel">
-		                <ul>
-
-							@if($producto->imagenes->get(0))
-								@foreach ($producto->imagenes as $imagen)
-									<li><a href="#"><img src="{{ asset('storage/thumbs/'.$imagen->ruta ) }}" data-large="{{ asset('storage/'.$imagen->ruta ) }}" alt="" data-description="" /></a></li>
-								@endforeach
-							@else
-								<img src="{{ asset('img/no-imagen.png') }}" class="rounded float-left" alt="Card image cap" width="100%">
-							@endif
-		                    
-		                </ul>
-		            </div>
-		            <div class="es-nav">
-		                <span class="es-nav-prev">Anterior</span>
-		                <span class="es-nav-next">Siguiente</span>
-		            </div>
-		        </div>
-		        <!-- End Elastislide Carousel Thumbnail Viewer -->
-		    </div><!-- rg-thumbs -->
-		</div><!-- rg-gallery -->
-
+			<?php $i++; ?>
+		    <div class="carousel-item {{ $active }}">
+		      <img class="d-block w-100" src="{{ asset('storage/'.$imagen->ruta ) }}" alt="Second slide">
+		    </div>
+		    @endforeach
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Anterior</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Siguiente</span>
+		  </a>
 		</div>
+		@else
+		<img src="{{ asset('img/no-imagen.png') }}" class="rounded float-left" alt="Card image cap" width="100%">
+		@endif
+	</div>
 	
 	<div class="col-md-6">
 		<div class="title">

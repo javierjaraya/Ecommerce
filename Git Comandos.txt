@@ -9,3 +9,10 @@ git add nombre.php	Para agregar un solo archivo
 git remote add origin +urlrepositorio		Asignar repositorio
 git comit -m "Descripcion del comit"	Para hacer un comit
 git push origin master		Para sincronizar y subir archivos
+
+
+
+---- PASOS -----
+git add .	
+git comit -m "Descripcion del comit"
+git push origin master	
