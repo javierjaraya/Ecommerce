@@ -28,6 +28,38 @@ class ProductoController extends Controller {
         return view('producto.index',compact('productos'))->with('search',$search);    
     }
 
+    public function buscardor(Request $request){
+        $texto_buscar = $request->texto_buscar;
+        $id_categoria = $request->id_categoria;
+
+        $productos;
+        if($id_categoria == 0){
+            $productos = Producto::nombre($texto_buscar)
+            ->leftJoin('oferta','producto.id','=','oferta.id_producto')
+            ->join('imagen','producto.id','=','imagen.id_producto')
+            ->where('imagen.es_principal','=','1')
+            ->paginate(10);
+        }else{
+            $productos = DB::table('producto')
+            ->select('producto.id','producto.nombre','producto.descripcion','producto.precio_normal','producto.stock','producto.marca','producto.modelo','subcategoria.id as id_subcategoria',
+            'oferta.id as id_oferta', 'oferta.precio_oferta as precio_oferta',
+            'imagen.ruta as ruta', 'imagen.es_principal',
+            'categoria.id as id_categoria','categoria.nombre as nombre_categoria')
+            ->leftJoin('oferta','producto.id','=','oferta.id_producto')
+            ->join('imagen','producto.id','=','imagen.id_producto')
+            ->join('subcategoria','producto.id_subcategoria','=','subcategoria.id')
+            ->join('categoria','subcategoria.id_categoria','=','categoria.id')
+            ->where('imagen.es_principal','=','1')
+            ->where('producto.nombre','LIKE','%'.$texto_buscar.'%')
+            ->where('categoria.id','=',$id_categoria)
+            ->get();
+        }
+        return view('busqueda.resultadoBusqueda')
+        ->with('productos',$productos)
+        ->with('texto_buscar',$texto_buscar)
+        ->with('id_categoria',$id_categoria);
+    }
+
     public function create(){
     	$categorias = Categoria::all();
 
@@ -201,6 +233,7 @@ class ProductoController extends Controller {
 
     public function productoSubCategoria($id){
         $productos = DB::table('producto')
+            ->select('producto.*','oferta.*','imagen.*')
             ->leftJoin('oferta','producto.id','=','oferta.id_producto')
             ->join('imagen','producto.id','=','imagen.id_producto')
             ->join('categoria','producto.id_subcategoria','=','categoria.id')

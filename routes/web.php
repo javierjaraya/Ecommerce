@@ -46,6 +46,10 @@ Route::get('/test',function(){
 });
 
 /*
+* Busqueda
+*/
+Route::get('/busqueda','ProductoController@buscardor')->name('busqueda');
+/*
 |-------------------------------------------------------------------------
 | Rutas Contenedor Cliente
 |-------------------------------------------------------------------------

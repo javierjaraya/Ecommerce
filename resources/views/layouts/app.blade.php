@@ -133,18 +133,29 @@
 				<div class="row">
 					
 				<div class="col-12 col-lg-9">
-					<div class="input-group mt-4 pl-3">
-					<input type="text" class="form-control" placeholder="Buscar producto" aria-label="Buscar producto" aria-describedby="basic-addon2">
-					<select class="custom-select" id="inputGroupSelect01">
-						<option selected>Todas las categorias</option>
-						<option value="1">Repuestos</option>
-						<option value="2">Vestuario</option>
-						<option value="3">Bicicletas</option>
-					</select>
-					<div class="input-group-append">				  	
-						<button class="btn btn-outline-secondary" type="button">Buscar</button>
+					<form action="{{ route('busqueda') }}" method="GET" class="form-inline  mt-4 pl-3">
+					<div class="input-group ml-5">
+						@if (isset($texto_buscar))
+							<input type="text" class="form-control" placeholder="Buscar producto" aria-label="Buscar producto" aria-describedby="basic-addon2" name="texto_buscar" size="70" value="{{ $texto_buscar }}">
+						@else
+							<input type="text" class="form-control" placeholder="Buscar producto" aria-label="Buscar producto" aria-describedby="basic-addon2" name="texto_buscar" size="70" >
+						@endif
+					  	
+						<select class="custom-select" id="" name="id_categoria">
+							<option value="0" selected>Todas las categorias</option>
+							@foreach ($categorias as $key => $categoria)
+								@if(isset($id_categoria) && $id_categoria == $categoria->id)
+									<option selected value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+								@else
+									<option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+								@endif
+							@endforeach
+						</select>
+						<div class="input-group-append">				  	
+							<button class="btn btn-outline-secondary" type="submit">Buscar</button>
+						</div>
 					</div>
-					</div>
+					</form>
 				</div>
 
 				<div class="col-lg-3">	
@@ -166,7 +177,7 @@
 					
 						<div id="MainMenu">
 						  <div class="list-group">
-						    
+						    <label class="list-group-item list-group-item-light collapsed text-light bg-dark" data-toggle="collapse" ><b>CATEGORIAS</b></label>
 							@foreach ($categorias as $key => $categoria)
 							<a href="#menu{{ $key }}" class="list-group-item list-group-item-light collapsed" data-toggle="collapse" data-parent="#MainMenu">{{ $categoria->nombre }}</a>
 						    <div class="collapse" id="menu{{ $key }}">

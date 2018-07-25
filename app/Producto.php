@@ -44,4 +44,11 @@ class Producto extends Model {
         if($modelo)
             return $query->where('modelo','LIKE',"%$modelo%");
     }
+
+    public function scopeCategoria($query, $id_categoria){
+        if($id_categoria)
+            return $query->join('subcategoria','producto.id_subcategoria','=','subcategoria.id')
+                    ->join('categoria','subcategoria.id','=','categoria.id')
+                    ->where('categoria.id','=', $id_categoria);
+    }
 }

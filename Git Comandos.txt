@@ -1,0 +1,11 @@
+https://github.com/javierjaraya/Ecommerce.git
+
+git init		Inicializar repositorio (Carpeta del proyecto)
+git status		Muestra los archivos nuevos y los modificados a subir
+
+git add .		Para agregar todo (Paso necesario antes del comit)
+git add nombre.php	Para agregar un solo archivo
+
+git remote add origin +urlrepositorio		Asignar repositorio
+git comit -m "Descripcion del comit"	Para hacer un comit
+git push origin master		Para sincronizar y subir archivos
