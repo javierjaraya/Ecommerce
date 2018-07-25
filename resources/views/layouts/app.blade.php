@@ -150,8 +150,9 @@
 		</header>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-2 col-md-2">				
-					<aside>
+				<!-- Div ASIDE-->
+				<div class="col-sm-4 col-md-3 col-lg-2">				
+					<aside class="mb-3">
 					
 						<div id="MainMenu">
 						  <div class="list-group">
@@ -170,20 +171,52 @@
 						</div>
 
 					</aside>
-				</div>
-				<div class=" col-sm-10 co-md-10">
+				</div><!-- Fin Div ASIDE --!>
+
+				<!-- Div Contenido Pagina-->
+				<div class=" col-sm-8 col-md-9 col-lg-10">
 					<section>					
 
 					@yield('content')
 
 
 					</section>
-				</div>
+				</div><!-- Fin Div Contenido Pagina -->
 			</div>
 		</div>
 
-		<footer class="footer footer-black">
-			
+		<footer class="footer text-light bg-dark">
+			<div class='container'> 
+				<div class="row">
+					<div class="col-md-4 p-3">
+						<b>Sobre Nosotros</b>
+						<br>
+						<a href="#">Quienes somos</a><br>
+						<a href="#">Metodos de envio</a><br>
+						<a href="#">Formas de pago</a><br>
+						<a href="#">Centro de ayuda</a><br>
+					</div>
+					<div class="col-md-4 p-3">
+						<div>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3202.79390704764!2d-72.09505748504351!3d-36.60727237998876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966929d542df3bd3%3A0xe7b440326d9bae25!2zQXJnZW50aW5hIDQwNiwgQ2hpbGxhbiwgQ2hpbGzDoW4sIFJlZ2nDs24gZGVsIELDrW8gQsOtbw!5e0!3m2!1ses!2scl!4v1532547612498" width="300" height="170" frameborder="0" style="border:0" allowfullscreen></iframe>
+						</div>
+					</div>
+					<div class="col-md-4 p-3">
+						<div>
+							<b>Contacto</b>
+							<br>
+							<i class="fas fa-phone"></i>
+							(42) 225 2161
+							<br>
+							<i class="fas fa-envelope"></i>
+							direcciondecorreo@web.com
+							<br>
+							<i class="fas fa-map-marker"></i>
+							Av. Argentina 406, Chillán, Chile
+						</div>
+					</div>
+				</div>
+			</div>
 		</footer>
 	</div>
 </body>
