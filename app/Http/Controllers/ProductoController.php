@@ -34,14 +34,17 @@ class ProductoController extends Controller {
 
         $productos;
         if($id_categoria == 0){
-            $productos = Producto::nombre($texto_buscar)
+            $productos = DB::table('producto')
+            ->select('producto.id as id_producto','producto.nombre','producto.descripcion','producto.precio_normal','producto.stock','producto.marca','producto.modelo',
+            'oferta.id as id_oferta', 'oferta.precio_oferta as precio_oferta',
+            'imagen.ruta as ruta', 'imagen.es_principal')
             ->leftJoin('oferta','producto.id','=','oferta.id_producto')
             ->join('imagen','producto.id','=','imagen.id_producto')
             ->where('imagen.es_principal','=','1')
             ->paginate(10);
         }else{
             $productos = DB::table('producto')
-            ->select('producto.id','producto.nombre','producto.descripcion','producto.precio_normal','producto.stock','producto.marca','producto.modelo','subcategoria.id as id_subcategoria',
+            ->select('producto.id as id_producto','producto.nombre','producto.descripcion','producto.precio_normal','producto.stock','producto.marca','producto.modelo','subcategoria.id as id_subcategoria',
             'oferta.id as id_oferta', 'oferta.precio_oferta as precio_oferta',
             'imagen.ruta as ruta', 'imagen.es_principal',
             'categoria.id as id_categoria','categoria.nombre as nombre_categoria')
@@ -96,7 +99,7 @@ class ProductoController extends Controller {
 
             $thumb = imagecreatetruecolor(65,65);
             imagecopyresampled($thumb,$image_info,0,0,0,0,65,65,$ancho,$alto);
-            imagejpeg($thumb,"storage/thumbs/".$newNombre,90);
+            imagejpeg($thumb,"storage/thumbs/".$newNombre,100);
 
        		//indicamos que queremos guardar un nuevo archivo en el disco local
 	        \Storage::disk('local')->put($newNombre, \File::get($file));
@@ -149,8 +152,10 @@ class ProductoController extends Controller {
 
         //obtenemos el campo file definido en el formulario
         $files = $productoUpdateRequest->file('imagenes');
-        
-
+        $imagenPrincipal = DB::table('imagen')
+               ->where('id_producto','=',$id)
+               ->where('es_principal','=','1')
+               ->get();        
         if($productoUpdateRequest->hasFile('imagenes')) {
             $i = 1;
             //recorremos el array de imagenes para subirlas al simultaneo
@@ -173,14 +178,18 @@ class ProductoController extends Controller {
 
             $thumb = imagecreatetruecolor(65,65);
             imagecopyresampled($thumb,$image_info,0,0,0,0,65,65,$ancho,$alto);
-            imagejpeg($thumb,"storage/thumbs/".$newNombre,90);
+            imagejpeg($thumb,"storage/thumbs/".$newNombre,100);
 
             //indicamos que queremos guardar un nuevo archivo en el disco local
             \Storage::disk('local')->put($newNombre, \File::get($file));
             
             $imagen = new Imagen;
             $imagen->ruta = $newNombre;
-            $imagen->es_principal = 0;
+            if(count($imagenPrincipal) == 0 && $i == 1){
+                $imagen->es_principal = 1;
+            } else{
+                $imagen->es_principal = 0;
+            }
             $imagen->id_producto = $producto->id;
             $imagen->save();  
             $i++;

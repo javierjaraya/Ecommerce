@@ -41,7 +41,7 @@
 	<div class="col-md-6">
 		<div class="title">
 			<h1>{{ $producto->nombre }}</h1>
-			<h6>SKU {{ $producto->id }}</h6>
+			<h6>SKU {{ $producto->id_producto }}</h6>
 		</div>
 		<div class="">
 			@if ($producto->precio_oferta != null)
@@ -64,12 +64,17 @@
 
 		<div class="">
 			<form class="form-inline mt-3">
-			@if ($producto->precio_oferta != null)
-			<input type="number" class="form-control" min="0" max="{{ $oferta->stock }}" name="cantidad" value="1">
+			@if($producto->stock > 0 || isset($oferta) && $oferta->stock > 0)
+				@if ($oferta != null)
+				<input type="number" class="form-control" min="0" max="{{ $oferta->stock }}" name="cantidad" value="1">
+				@else
+				<input type="number" class="form-control" min="0" max="{{ $producto->stock }}" name="cantidad" value="1">
+				@endif
+				<button type="button" class="btn btn-success ml-2"><i class="fas fa-shopping-cart"></i>  Añadir al carro</button>
 			@else
-			<input type="number" class="form-control" min="0" max="{{ $producto->stock }}" name="cantidad" value="1">
+				<h5>Sin stock</h5>
+				<button type="button" class="btn btn-success ml-2" disabled><i class="fas fa-shopping-cart"></i>  Añadir al carro</button>
 			@endif
-			<button type="button" class="btn btn-success ml-2"><i class="fas fa-shopping-cart"></i>  Añadir al carro</button>
 			</form>
 		</div>
 	</div>

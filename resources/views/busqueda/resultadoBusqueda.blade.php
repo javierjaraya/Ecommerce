@@ -15,7 +15,7 @@
 
 			    	</span>
 			    </div>
-			    <a href="{{ route('producto.show', [$producto->id] ) }}">
+			    <a href="{{ route('producto.show', [$producto->id_producto] ) }}">
 					@if($producto->ruta)
 						<img class="card-img-top" src="{{ asset('storage/'.$producto->ruta) }}" alt="Card image cap">
 					@else
@@ -24,7 +24,7 @@
 				</a>
 			  	
 			  <div class="card-body">
-			    <h5 class="card-title text-center"><a  href="{{ route('producto.show', [$producto->id] ) }}">{{ $producto->nombre }}</a> 
+			    <h5 class="card-title text-center"><a  href="{{ route('producto.show', [$producto->id_producto] ) }}">{{ $producto->nombre }}</a> 
 			    </h5>
 			    <p class="card-text text-center">
 			    	@if (isset($producto->precio_oferta))

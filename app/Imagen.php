@@ -15,4 +15,14 @@ class Imagen extends Model {
     protected $fillable = [
         'id','ruta', 'es_principal','id_producto'
     ];
+
+    public function scopeIdProducto($query, $id_producto){
+        if($id_producto)
+            return $query->where('id_producto','=',$id_producto);
+    }
+
+    public function scopePrincipal($query,$id_producto){    
+    	if($id_producto)    
+            return $query->where('es_principal','=','1')->where('id_producto','=',$id_producto);
+    }
 }

@@ -23,7 +23,7 @@ class ProductoRequest extends FormRequest {
         return [
             'id' => 'required|alpha_num|min:0|unique:producto,id',//unique:producto'
             'nombre' => 'required',
-            'descripcion' => 'required',
+            'descripcion' => 'required|max:1500',
             'precio_normal' => 'required|min:0',
             'stock' => 'required|alpha_num|min:0',
             'marca' => 'required',
