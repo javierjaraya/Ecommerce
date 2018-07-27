@@ -20,4 +20,9 @@ class Cliente extends Model {
     public function usuario() {
         return $this->hasOne('App\Usuario', 'id'); // Le indicamos que se va relacionar con la tabla usuario y su atributo id
     }
+
+    public function scopeIdUsuario($query, $id_usuario){
+        if($id_usuario)
+            return $query->where('id_usuario','=',$id_usuario);
+    }
 }

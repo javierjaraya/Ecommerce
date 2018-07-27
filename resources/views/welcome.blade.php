@@ -4,7 +4,7 @@
 		<div class="row">
         @foreach ($productos as $producto)
         <div class="col-3">
-			<div class="card" style="">
+			<div class="card mb-3" style="">
 				<div class="card-title text-right pr-1 mb-1">
 					<span class="badge badge-success">
 						@if ($producto->precio_oferta != null)

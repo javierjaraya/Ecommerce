@@ -126,4 +126,12 @@ Route::resource('oferta','OfertaController')->middleware('admin');
 Route::get('ofertas/{id}','OfertaController@index')->middleware('admin');
 Route::GET('oferta.removemodal','OfertaController@removeModal')->middleware('admin')->name('ofertaRemoveModal');
 
-
+/*
+|------------------------------------------------------------------------
+| Rutas Contenedor Carro Compra
+|------------------------------------------------------------------------
+| 
+|
+*/
+Route::get('carroCompra/{id_cliente}','CarroCompraController@show')->name('carroCompra');
+Route::post('detalleCarro/store','DetalleCarroCompraController@store')->name('detalleCarroStore');

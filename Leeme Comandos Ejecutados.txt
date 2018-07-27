@@ -36,3 +36,8 @@ php artisan make:model Oferta
 php artisan make:request OfertaRequest
 composer require intervention/image   			Instalar libreria para intervenir imagenes al subir
 php artisan make:provider ComposerServiceProvider	Crear un Service provider para cargar el menu a todas las vistas
+php artisan make:model CarroCompra
+php artisan make:model DetalleCarroCompra
+php artisan make:controller CarroCompraController
+php artisan make:controller DetalleCarroCompraController
+php artisan make:request DetalleCarroRequest

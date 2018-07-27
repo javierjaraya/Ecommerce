@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+
+		@include('busqueda.fragment.error')
+		@include('busqueda.fragment.success')
+
 		<div class="row">
         @foreach ($productos as $producto)
         <div class="col-3">

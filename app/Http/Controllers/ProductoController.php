@@ -89,10 +89,6 @@ class ProductoController extends Controller {
 
             $newNombre = $fecha."_".$i."_product.".strtolower($foo);
 
-            //$img = Image::make($file);
-            //$img->resize(240, 240);
-            //$ima->save(public_path('storage/thumbs/',$newNombre));
-            //imagejpeg($file, public_path('storage/thumbs/',$newNombre),90);
             $image_info = imagecreatefromjpeg($file);
             $ancho = imagesx($image_info);
             $alto = imagesy($image_info);

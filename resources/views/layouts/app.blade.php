@@ -137,10 +137,14 @@
 				</div>
 
 				<div class="col-lg-3">	
-					<div class="mt-4 mb-3 pl-3">						
-						<button type="button" class="btn btn-light btn-sm pt-2">
-							<h4><i class="fas fa-shopping-cart"></i> <span class="badge badge-info">0</span> <span class="badge badge-secondary badge-light">Mi Carro $ 0</span></h4>
-						</button>
+					<div class="mt-4 mb-3 pl-3">				
+						@if (Auth::user() != null)
+							<a href="{{ route('carroCompra',[Auth::user()->id]) }}" class="btn btn-light btn-sm pt-2">
+						@else
+							<a href="#" class="btn btn-light btn-sm pt-2">
+						@endif		
+							<h4><i class="fas fa-shopping-cart"></i> <span class="badge badge-info">{{ $cantidad_total_carro }}</span> <span class="badge badge-secondary badge-light">Mi Carro $ {{ number_format($total_carro) }}</span></h4>
+						</a>
 					</div>				
 				</div>
 
