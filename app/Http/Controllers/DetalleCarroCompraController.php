@@ -22,22 +22,11 @@ class DetalleCarroCompraController extends Controller
 
     	//Obtener cliente actual
     	$id_usuario = Auth::id();
-    	$cliente = CLiente::idUsuario($id_usuario)->get();	
+    	$cliente = CLiente::idUsuario($id_usuario)->first();	
     	$producto = Producto::find($request->id_producto);
-    	//Verificar si tiene oferta para utilizar el precio oferta
 
-    	$carro_compra = CarroCompra::idCliente($cliente[0]->id)->get();
-    	//Si no hay un carro creado lo creamos
-    	if (count($carro_compra) == 0) {
-    		$carro_compra = CarroCompra::create(
-    			[
-    				'id_cliente'=> $cliente[0]->id
-    			]
-    		);
-    	}else{
-    		$carro_compra = $carro_compra[0];
-    	}
-
+    	$carro_compra = CarroCompra::idCliente($cliente->id)->first();
+    	
     	//Si hay oferta utiliza el precio oferta
     	$precio = $producto->precio_normal;
     	if(isset($request->precio_oferta)){
@@ -71,5 +60,28 @@ class DetalleCarroCompraController extends Controller
     	    ->with('success','Producto agregado al carrito.')
     	    ->with('detalle',$detalleTemp);
 
+    }
+
+    public function update(Request $request, $id_detalle_carro){
+    	$detalle = DetalleCarroCompra::find($id_detalle_carro);
+
+    	if($request->cantidad == 0)
+    		$detalle->delete();
+    	else
+    		$detalle->update($request->all());
+    	
+
+    	return redirect()->back()
+    	    ->with('success','Carrito actualizado.')
+    	    ->with('detalle',$detalle);
+    }
+
+    public function destroy($id_detalle_carro){
+    	$detalle = DetalleCarroCompra::findOrFail($id_detalle_carro);
+    	$detalle->delete();
+
+    	return redirect()->back()
+    	    ->with('success','Carrito actualizado.')
+    	    ->with('detalle',$detalle);
     }
 }

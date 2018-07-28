@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-12 mb-2">
 
 		<h3>Carrito de compra</h3>
 		<table class="table">
@@ -27,7 +27,7 @@
 					  <th scope="row">
 					  	@foreach ($detalle->producto->imagenes as $key => $imagen)
 					  		@if ($imagen->es_principal == 1)
-					  			<img src="{{ asset('storage/'.$imagen->ruta) }}" height="45px" width="45px">
+					  			<img src="{{ asset('storage/'.$imagen->ruta) }}" height="50px" width="50px">
 					  		@endif
 					  	@endforeach
 					  </th>
@@ -39,9 +39,22 @@
 						@endif
 					  </td>
 					  <td style="">
-					  	<input type="number" id="cantidad_{{ $key }}" name="cantidad" min="0" max="{{ $detalle->producto->stock }}" value="{{ $detalle->cantidad }}" onchange="actualizarPrecio('total_{{ $key }}',this.value,{{ $detalle->precio }})">
+					  	<form action="{{ route('detalleCarroUpdate',[$detalle->id_detalle_carro]) }}" method="POST">
+					@csrf
+                    @method('PUT')
+					  	<input type="hidden" name="id_carro_compra" value="{{ $detalle->id_carro_compra }}">
+					  	<input type="hidden" name="id_detalle_carro" value="{{ $detalle->id_detalle_carro }}">
+					  	<input type="number" id="cantidad_{{ $key }}" name="cantidad" min="0" max="{{ $detalle->producto->stock }}" value="{{ $detalle->cantidad }}" onchange="this.form.submit()">
+					  	</form>
 					  </td>
-					  <td id="total_{{ $key }}">$ {{ number_format($detalle->precio*$detalle->cantidad) }}</td>
+					  <td>
+					  	<form action="{{ route('detalleCarroDestroy',[$detalle->id_detalle_carro]) }}" class="form-inline" method="POST">
+					  		@csrf
+					  		@method('DELETE')
+                    		<span id="total_{{ $key }}">$ {{ number_format($detalle->precio*$detalle->cantidad) }}</span>
+					  		<button type="submit" class="btn btn-link"><i class="far fa-trash-alt"></i></button>
+					  	</form>
+					  </td>
 					</tr>
 				@endforeach
 				@endif
@@ -50,34 +63,20 @@
 	</div>
 </div>
 
+<div class="row">
+	<div class="col-md-12 mb-3 pr-5">
+		<a href="{{ url('/') }}" class="btn btn-success float-left text-light"><i class="fas fa-chevron-left"></i>  Seguir comprando</a>
+		@if (count($detalle_carro) == 0)
+			<button class="btn btn-success float-right" disabled><i class="fas fa-dollar-sign"></i>  Pasar por caja</button>
+		@else
+			<a href="{{ route('caja') }}" class="btn btn-success float-right"><i class="fas fa-dollar-sign"></i>  Pasar por caja</a>
+		@endif
+	</div>
+</div>
+
 <script type="text/javascript">
 	
-	function actualizarPrecio($td_total,$cantidad,$precio){
-		$("#"+$td_total).html("$ "+number_format($cantidad*$precio),0);
-		//Actualizarlo a nivel de BD - Pendiente
-	}
-
-	function number_format(amount, decimals) {
-	    amount += ''; // por si pasan un numero en vez de un string
-	    amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
-
-	    decimals = decimals || 0; // por si la variable no fue fue pasada
-
-	    // si no es un numero o es igual a cero retorno el mismo cero
-	    if (isNaN(amount) || amount === 0) 
-	        return parseFloat(0).toFixed(decimals);
-
-	    // si es mayor o menor que cero retorno el valor formateado como numero
-	    amount = '' + amount.toFixed(decimals);
-
-	    var amount_parts = amount.split('.'),
-	        regexp = /(\d+)(\d{3})/;
-
-	    while (regexp.test(amount_parts[0]))
-	        amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
-
-	    return amount_parts.join('.');
-	}
+	
 </script>
 
 

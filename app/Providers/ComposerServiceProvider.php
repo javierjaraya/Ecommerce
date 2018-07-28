@@ -30,28 +30,19 @@ class ComposerServiceProvider extends ServiceProvider
             if(Auth::check()){
                 $id_usuario = Auth::id();
                 $cliente = CLiente::idUsuario($id_usuario)->get();
-                //Verificar si existe carro
-                $carro_compra = CarroCompra::idCliente($cliente[0]->id)->get();
-                //Si no hay un carro creado lo creamos
-                if (count($carro_compra) == 0) {
-                    $carro_compra = CarroCompra::create(
-                        [
-                            'id_cliente'=> $cliente[0]->id
-                        ]
-                    );
+                
+                $carro_compra = CarroCompra::idCliente($cliente[0]->id)->first();
+                
+                $carroTemp = DB::select(
+                    'select sum(cantidad) as cantidad, sum(precio*cantidad) as total from detalle_carro_compra where id_carro_compra = ? GROUP BY id_carro_compra ', [$carro_compra->id_carro_compra]
+                );
+                if($carroTemp != null){
+                    $cantidad_total_carro = $carroTemp[0]->cantidad;
+                    $total_carro = $carroTemp[0]->total;
                 }else{
-                    $carro_compra = $carro_compra[0];
+                    $cantidad_total_carro = 0;
+                    $total_carro = 0;
                 }
-
-                $cantidadTemp = DB::select(
-                    'select sum(cantidad) as cantidad from detalle_carro_compra where id_carro_compra = ? GROUP BY id_carro_compra ', [$carro_compra->id_carro_compra]
-                );
-                $cantidad_total_carro = $cantidadTemp[0]->cantidad;
-
-                $totalTemp = DB::select(
-                    'select sum(precio*cantidad) as total from detalle_carro_compra where id_carro_compra = ? GROUP BY id_carro_compra ', [$carro_compra->id_carro_compra]
-                );
-                $total_carro = $totalTemp[0]->total;
             }else{
                 $cantidad_total_carro = 0;
             }
