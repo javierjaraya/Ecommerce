@@ -85,7 +85,13 @@
 				  	@else
 				  		<li class="nav-item dropdown">
 	                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-	                            {{ Auth::user()->email }} <span class="caret"></span>
+	                        	@if ($cliente == null || $cliente->nombres_rason_social == '')
+	                        		{{ Auth::user()->email}} 
+	                        	@else
+	                        		{{ $cliente->nombres_rason_social.' '.$cliente->apellidos }} 
+	                        	@endif
+
+	                            <span class="caret"></span>
 	                        </a>
 
 	                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -137,12 +143,8 @@
 				</div>
 
 				<div class="col-lg-3">	
-					<div class="mt-4 mb-3 pl-3">				
-						@if (Auth::user() != null)
-							<a href="{{ route('carroCompra',[Auth::user()->id]) }}" class="btn btn-light btn-sm pt-2">
-						@else
-							<a href="#" class="btn btn-light btn-sm pt-2">
-						@endif		
+					<div class="mt-4 mb-3 pl-3">			
+						<a href="{{ route('carroCompra') }}" class="btn btn-light btn-sm pt-2">
 							<h4><i class="fas fa-shopping-cart"></i> <span class="badge badge-info">{{ $cantidad_total_carro }}</span> <span class="badge badge-secondary badge-light">Mi Carro $ {{ number_format($total_carro) }}</span></h4>
 						</a>
 					</div>				

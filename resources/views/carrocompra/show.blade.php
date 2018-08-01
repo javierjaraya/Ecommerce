@@ -3,8 +3,9 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-12 mb-2">
-
+	<div class="col-md-12">
+		@include('carrocompra.fragment.error')
+		@include('carrocompra.fragment.success')
 		<h3>Carrito de compra</h3>
 		<table class="table">
 			<thead class="thead-dark">
@@ -17,6 +18,7 @@
 			</tr>
 			</thead>
 			<tbody>
+				<?php $total = 0;?>
 				@if (count($detalle_carro) == 0)
 					<tr>
 						<th> Carro vacio</th>
@@ -39,19 +41,30 @@
 						@endif
 					  </td>
 					  <td style="">
+					  	@guest
+					  	<form action="{{ route('detalleCarroUpdate',[0]) }}" method="POST">
+						@else
 					  	<form action="{{ route('detalleCarroUpdate',[$detalle->id_detalle_carro]) }}" method="POST">
-					@csrf
-                    @method('PUT')
+					  	@endguest
+						@csrf
+	                    @method('PUT')
 					  	<input type="hidden" name="id_carro_compra" value="{{ $detalle->id_carro_compra }}">
 					  	<input type="hidden" name="id_detalle_carro" value="{{ $detalle->id_detalle_carro }}">
+					  	<input type="hidden" name="id_producto" value="{{ $detalle->id_producto }}">
 					  	<input type="number" id="cantidad_{{ $key }}" name="cantidad" min="0" max="{{ $detalle->producto->stock }}" value="{{ $detalle->cantidad }}" onchange="this.form.submit()">
 					  	</form>
 					  </td>
 					  <td>
+					  	@guest
+					  	<form action="{{ route('detalleCarroDestroy',[0]) }}" class="form-inline" method="POST">
+					  	@else
 					  	<form action="{{ route('detalleCarroDestroy',[$detalle->id_detalle_carro]) }}" class="form-inline" method="POST">
+					  	@endguest
 					  		@csrf
 					  		@method('DELETE')
+					  		<input type="hidden" name="id_producto" value="{{ $detalle->id_producto }}">
                     		<span id="total_{{ $key }}">$ {{ number_format($detalle->precio*$detalle->cantidad) }}</span>
+                    		<?php $total += $detalle->precio*$detalle->cantidad; ?>
 					  		<button type="submit" class="btn btn-link"><i class="far fa-trash-alt"></i></button>
 					  	</form>
 					  </td>
@@ -60,6 +73,16 @@
 				@endif
 			</tbody>
 		</table>
+	</div>
+</div>
+
+<div class="row mb-3">
+	<div class="col-sm-4 text-center mx-auto" style="width: 200px;">
+		<hr>
+		<h6>SubTotal: ${{ number_format($total-$total*0.19) }}</h6>
+		<h6>iva 19%: ${{ number_format($total*0.19) }}</h6>
+		<hr>
+	<h4><b>Total ${{ number_format($total) }}</b></h4>
 	</div>
 </div>
 
