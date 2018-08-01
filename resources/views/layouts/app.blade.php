@@ -197,10 +197,10 @@
 					<div class="col-md-4 p-3">
 						<b>Sobre Nosotros</b>
 						<br>
-						<a href="#">Quienes somos</a><br>
-						<a href="#">Metodos de envio</a><br>
-						<a href="#">Formas de pago</a><br>
-						<a href="#">Centro de ayuda</a><br>
+						<a href="#"><i class="fas fa-angle-right"></i> Quienes somos</a><br>
+						<a href="#"><i class="fas fa-angle-right"></i> Metodos de envio</a><br>
+						<a href="#"><i class="fas fa-angle-right"></i> Formas de pago</a><br>
+						<a href="#"><i class="fas fa-angle-right"></i> Centro de ayuda</a><br>
 					</div>
 					<div class="col-md-4 p-3">
 						<div>

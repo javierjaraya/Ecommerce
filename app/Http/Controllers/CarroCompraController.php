@@ -56,6 +56,10 @@ class CarroCompraController extends Controller {
         }
 	}
 
+	public function pagar(Request $request){
+		return 'pagado';
+	}
+
 	public function carroCookies(Request $request){
 
 		$detalleCarroCookies = \Cookie::get('detalleCarroCookies');

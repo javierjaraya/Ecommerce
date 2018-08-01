@@ -4,108 +4,125 @@
 
 <div class="row">
 	<div class="col-md-8"> 
+		<form action="{{ route('pagar') }}" method="POST" class="needs-validation" novalidate>
+		@csrf
+			<div class="card">
+			  <div class="card-header">
+			    <b>Primer Paso - Datos envío</b>
+			  </div>
+			  <div class="card-body" id="datosEnvio">
+			    	<div class="form-group row">
+				    <label for="rut" class="col-sm-2 col-form-label">Rut</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="rut" name="rut" placeholder="Rut" value="{{ $cliente->rut }}" required>
+				      <div class="invalid-feedback">
+				        Por favor ingrese su rut
+				      </div>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="nombres_rason_social" class="col-sm-2 col-form-label">Nombre</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="nombres_rason_social" name="nombres_rason_social" placeholder="Nombre" value="{{ $cliente->nombres_rason_social }}" required>
+				      <div class="invalid-feedback">
+				        Por favor ingrese su nombre o razon social
+				      </div>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" value="{{ $cliente->apellidos }}" required>
+				      <div class="invalid-feedback">
+				        Por favor ingrese sus apellidos
+				      </div>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="{{ $cliente->direccion }}" required>
+				      <div class="invalid-feedback">
+				        Por favor ingrese su direccion
+				      </div>
+				    </div>
+				  </div>
+				  <div class="form-group row">
+				    <label for="contacto" class="col-sm-2 col-form-label">Telefono</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Telefono" value="{{ $cliente->contacto }}" required>
+				      <div class="invalid-feedback">
+				        Por favor ingrese su numero de telefono
+				      </div>
+				    </div>
+				  </div>
+			  </div>
+			</div>
 
-		<div class="card" onclick="datosEnvio()">
-		  <div class="card-header">
-		    Primer Paso - Datos envío
-		  </div>
-		  <div class="card-body" id="datosEnvio">
-		    <form>
-		    	<div class="form-group row">
-			    <label for="inputRut" class="col-sm-2 col-form-label">Rut</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="inputRut" name="rut" placeholder="Rut" value="{{ $cliente->rut }}">
-			    </div>
+			<div class="card">
+			  <div class="card-header">
+			    <b>Segundo Paso - Método de envío</b>
 			  </div>
-			  <div class="form-group row">
-			    <label for="inputNombre" class="col-sm-2 col-form-label">Nombre</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="inputNombre" name="nombre" placeholder="Nombre" value="{{ $cliente->nombres_rason_social }}">
-			    </div>
+			  <div class="card-body" id="metodoDespacho">
+			    <div class="form-check">
+				  <input class="form-check-input" type="radio" name="metodoDespacho" id="radio1" value="Despacho a domicilio" required>
+				  <label class="form-check-label" for="radio1">
+				    Despacho a domicilio (Por pagar)
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="metodoDespacho" id="radio2" value="Retiro en tienda">
+				  <label class="form-check-label" for="radio2">
+				    Retiro en tienda
+				  </label>
+				  <div class="invalid-feedback">
+			        Por favor seleccione el método de despacho.
+			      </div>
+				</div>
+				<div class="form-group mt-3">
+				    <label for="comentario_envio">Si desea dejarnos un comentario acerca de su pedido, por favor, escríbalo a continuación.</label>
+	    			<textarea class="form-control" id="comentario_envio" name="comentario_envio" rows="3"></textarea>
+				  </div>
 			  </div>
-			  <div class="form-group row">
-			    <label for="inputApellidos" class="col-sm-2 col-form-label">Apellidos</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="inputApellidos" name="apellidos" placeholder="Apellidos" value="{{ $cliente->apellidos }}">
-			    </div>
-			  </div>
-			  <div class="form-group row">
-			    <label for="inputDireccion" class="col-sm-2 col-form-label">Dirección</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="inputDireccion" name="direccion" placeholder="Dirección" value="{{ $cliente->direccion }}">
-			    </div>
-			  </div>
-			  <div class="form-group row">
-			    <label for="inputTelefono" class="col-sm-2 col-form-label">Telefono</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="inputTelefono" name="telefono" placeholder="Telefono" value="{{ $cliente->contacto }}">
-			    </div>
-			  </div>
-			    <button type="submit" class="btn btn-primary" style="width: 100%;">Continuar</button>
-			</form>
-		  </div>
-		</div>
+			</div>
 
-		<div class="card" onclick="metodoDespacho()">
-		  <div class="card-header">
-		    Segundo Paso - Método de envío
-		  </div>
-		  <div class="card-body" id="metodoDespacho" style="display: none;">
-		    <div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-			  <label class="form-check-label" for="exampleRadios1">
-			    Despacho a domicilio
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-			  <label class="form-check-label" for="exampleRadios2">
-			    Retiro en tienda
-			  </label>
-			</div>
-			<div class="form-group mt-3">
-			    <label for="comentario_envio">Si desea dejarnos un comentario acerca de su pedido, por favor, escríbalo a continuación.</label>
-    			<textarea class="form-control" id="comentario_envio" rows="3"></textarea>
+			<div class="card mb-3">
+			  <div class="card-header">
+			    <b>Ultimo Paso - Medio de Pago</b>
 			  </div>
-			<button type="submit" class="btn btn-primary" style="width: 100%;">Continuar</button>
-		  </div>
-		</div>
-
-		<div class="card mb-3" onclick="medioPago()">
-		  <div class="card-header">
-		    Ultimo Paso - Medio de Pago
-		  </div>
-		  <div class="card-body" id="medioPago" style="display: none;">
-		    <div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-			  <label class="form-check-label" for="exampleRadios1">
-			    Webpay Plus
-			  </label>
+			  <div class="card-body" id="medioPago">
+			    <div class="form-check">
+				  <input class="form-check-input" type="radio" name="medioPago" id="radio3" value="option1" required>
+				  <label class="form-check-label" for="radio3">
+				    Webpay Plus
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="medioPago" id="radio4" value="option1">
+				  <label class="form-check-label" for="radio4">
+				    PayPal
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="medioPago" id="radio5" value="option2">
+				  <label class="form-check-label" for="radio5">
+				    Pago por transferencia bancaria
+				  </label>
+				  <div class="invalid-feedback">
+			        Por favor seleccione un medio de pago.
+			      </div>
+				</div>
+				<br>
+				<input type="submit" class="btn btn-primary" style="width: 100%;" value="Pagar">
+			  </div>
 			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-			  <label class="form-check-label" for="exampleRadios1">
-			    PayPal
-			  </label>
-			</div>
-			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-			  <label class="form-check-label" for="exampleRadios2">
-			    Pago por transferencia bancaria
-			  </label>
-			</div>
-			<br>
-			<button type="submit" class="btn btn-primary" style="width: 100%;">Comprar</button>
-		  </div>
-		</div>
-
-		
+		</form>
 	</div>
 
 	<div class="col-md-4 mb-3">
 		<div class="card">
 		  <div class="card-header">
-		    Resumen
+		    <b>Resumen</b>
 		  </div>
 		  <div class="card-body">
 		  	<?php $total = 0; ?>
@@ -145,26 +162,25 @@
 </div>
 
 
-<script type="text/javascript">
-	
-
-	function datosEnvio(){
-		$("#datosEnvio").show();
-		$("#metodoDespacho").hide();
-		$("#medioPago").hide();
-	}
-
-	function metodoDespacho(){
-		$("#datosEnvio").hide();
-		$("#metodoDespacho").show();
-		$("#medioPago").hide();
-	}
-
-	function medioPago(){
-		$("#datosEnvio").hide();
-		$("#metodoDespacho").hide();
-		$("#medioPago").show();
-	}
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 </script>
 
 @endsection
