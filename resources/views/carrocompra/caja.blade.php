@@ -12,45 +12,45 @@
 			  </div>
 			  <div class="card-body" id="datosEnvio">
 			    	<div class="form-group row">
-				    <label for="rut" class="col-sm-2 col-form-label">Rut</label>
+				    <label for="rut_retira" class="col-sm-2 col-form-label">Rut</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="rut" name="rut" placeholder="Rut" value="{{ $cliente->rut }}" required>
+				      <input type="text" class="form-control" id="rut_retira" name="rut_retira" placeholder="Rut" value="{{ $cliente->rut }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese su rut
 				      </div>
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="nombres_rason_social" class="col-sm-2 col-form-label">Nombre</label>
+				    <label for="nombre_retira" class="col-sm-2 col-form-label">Nombre</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="nombres_rason_social" name="nombres_rason_social" placeholder="Nombre" value="{{ $cliente->nombres_rason_social }}" required>
+				      <input type="text" class="form-control" id="nombre_retira" name="nombre_retira" placeholder="Nombre" value="{{ $cliente->nombres_rason_social }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese su nombre o razon social
 				      </div>
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="apellidos" class="col-sm-2 col-form-label">Apellidos</label>
+				    <label for="apellido_retira" class="col-sm-2 col-form-label">Apellidos</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" value="{{ $cliente->apellidos }}" required>
+				      <input type="text" class="form-control" id="apellido_retira" name="apellido_retira" placeholder="Apellidos" value="{{ $cliente->apellidos }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese sus apellidos
 				      </div>
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="direccion" class="col-sm-2 col-form-label">Dirección</label>
+				    <label for="direccion_retira" class="col-sm-2 col-form-label">Dirección</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" value="{{ $cliente->direccion }}" required>
+				      <input type="text" class="form-control" id="direccion_retira" name="direccion_retira" placeholder="Dirección" value="{{ $cliente->direccion }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese su direccion
 				      </div>
 				    </div>
 				  </div>
 				  <div class="form-group row">
-				    <label for="contacto" class="col-sm-2 col-form-label">Telefono</label>
+				    <label for="telefono_retira" class="col-sm-2 col-form-label">Telefono</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="contacto" name="contacto" placeholder="Telefono" value="{{ $cliente->contacto }}" required>
+				      <input type="text" class="form-control" id="telefono_retira" name="telefono_retira" placeholder="Telefono" value="{{ $cliente->contacto }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese su numero de telefono
 				      </div>
@@ -65,23 +65,23 @@
 			  </div>
 			  <div class="card-body" id="metodoDespacho">
 			    <div class="form-check">
-				  <input class="form-check-input" type="radio" name="metodoDespacho" id="radio1" value="Despacho a domicilio" required>
+				  <input class="form-check-input" type="radio" name="id_tipo_despacho" id="radio1" value="1" required>
 				  <label class="form-check-label" for="radio1">
 				    Despacho a domicilio (Por pagar)
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="metodoDespacho" id="radio2" value="Retiro en tienda">
+				  <input class="form-check-input" type="radio" name="id_tipo_despacho" id="radio2" value="2">
 				  <label class="form-check-label" for="radio2">
-				    Retiro en tienda
+				    Retiro en tienda (Gratis)
 				  </label>
 				  <div class="invalid-feedback">
 			        Por favor seleccione el método de despacho.
 			      </div>
 				</div>
 				<div class="form-group mt-3">
-				    <label for="comentario_envio">Si desea dejarnos un comentario acerca de su pedido, por favor, escríbalo a continuación.</label>
-	    			<textarea class="form-control" id="comentario_envio" name="comentario_envio" rows="3"></textarea>
+				    <label for="comentario_despacho">Si desea dejarnos un comentario acerca de su pedido, por favor, escríbalo a continuación.</label>
+	    			<textarea class="form-control" id="comentario_despacho" name="comentario_despacho" rows="3"></textarea>
 				  </div>
 			  </div>
 			</div>
@@ -92,19 +92,21 @@
 			  </div>
 			  <div class="card-body" id="medioPago">
 			    <div class="form-check">
-				  <input class="form-check-input" type="radio" name="medioPago" id="radio3" value="option1" required>
+				  <input class="form-check-input" type="radio" name="id_medio_pago" id="radio3" value="1" required>
 				  <label class="form-check-label" for="radio3">
 				    Webpay Plus
+				    <img src="{{ asset('img/webpay.png') }}" width="60px" height="">
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="medioPago" id="radio4" value="option1">
+				  <input class="form-check-input" type="radio" name="id_medio_pago" id="radio4" value="2">
 				  <label class="form-check-label" for="radio4">
 				    PayPal
+				    <img src="{{ asset('img/paypal.png') }}" width="60px" height="">
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="medioPago" id="radio5" value="option2">
+				  <input class="form-check-input" type="radio" name="id_medio_pago" id="radio5" value="3">
 				  <label class="form-check-label" for="radio5">
 				    Pago por transferencia bancaria
 				  </label>

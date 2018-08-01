@@ -137,6 +137,14 @@ Route::get('carroCompra','CarroCompraController@show')->name('carroCompra');
 Route::post('detalleCarro/store','DetalleCarroCompraController@store')->name('detalleCarroStore');
 Route::put('detalleCarro/update/{id_detalle_carro}','DetalleCarroCompraController@update')->name('detalleCarroUpdate');
 Route::delete('detalleCarro/destroy/{id_detalle_carro}','DetalleCarroCompraController@destroy')->name('detalleCarroDestroy');
-
 Route::get('caja','CarroCompraController@caja')->name('caja');
-Route::post('pagar','CarroCompraController@pagar')->name('pagar');
+
+/*
+|------------------------------------------------------------------------
+| Rutas Contenedor Venta
+|------------------------------------------------------------------------
+| 
+|
+*/
+Route::post('pagar','VentaController@store')->name('pagar');
+Route::get('resumenVenta/{id_venta}','VentaController@resumenVenta')->name('resumenVenta');
