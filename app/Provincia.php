@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Provincia extends Model {
     protected $table = 'provincias';
-    protected $primary_key = 'provincia_id';
+    protected $primaryKey = 'provincia_id';
 
     /**
      * The attributes that are mass assignable.

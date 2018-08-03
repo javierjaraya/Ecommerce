@@ -4,12 +4,14 @@
 	<div class="row">
 		@include('venta.fragment.error')
 		@include('venta.fragment.success')
+		@include('venta.fragment.info')
 		<div class="col-sm-12 mb-3">
 			<div class="card">
 			  <div class="card-header">
 			    Resumen Venta
 			  </div>
 			  <div class="card-body">
+				
 				<div class="row">
 					<div class="col-sm-6">
 						Numero de orden:<br>
@@ -76,6 +78,18 @@
 					</div>
 				</div>
 
+				@if ($venta->id_estado_venta == 6)
+					<div class="row">
+						@include('venta.fragment.infoTransferencia')
+					</div>
+				@else
+					<div class="row mb-3">
+						<div class="col-12 text-center">
+							<img src="{{ asset('img/ok.png') }}" width="80rem;">
+							<h1>Pago Aprobado</h1>
+						</div>
+					</div>
+				@endif
 
 			  </div>
 			</div>

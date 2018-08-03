@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DetalleCarroCompra extends Model
 {
     protected $table = "detalle_carro_compra";
-    //protected $primary_key = 'id_detalle_carro';
     protected $primaryKey = 'id_detalle_carro';
-    //public $timestamps = "false";//Decir que no se utilizaran los campos update y create en la BD
 
     /**
      * The attributes that are mass assignable.

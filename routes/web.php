@@ -148,3 +148,20 @@ Route::get('caja','CarroCompraController@caja')->name('caja');
 */
 Route::post('pagar','VentaController@store')->name('pagar');
 Route::get('resumenVenta/{id_venta}','VentaController@resumenVenta')->name('resumenVenta');
+Route::get('guardarVenta/{id_estado_venta}','VentaController@guardarVenta')->name('guardarVenta');
+
+/*
+|------------------------------------------------------------------------
+| Rutas Contenedor PayPal
+|------------------------------------------------------------------------
+| 
+*/
+Route::get('payment', array(
+	'as' => 'payment',
+	'uses' => 'PaypalController@postPayment',
+));
+
+Route::get('payment/status', array(
+	'as' => 'payment.status',
+	'uses' => 'PaypalController@getPaymentStatus',
+));

@@ -47,3 +47,5 @@ php artisan make:model EstadoVenta
 php artisan make:model MedioPago
 php artisan make:model TipoDespacho
 php artisan make:model DetalleVenta
+composer require paypal/rest-api-sdk-php		Instalar api de Paypal
+php artisan make:controller PaypalController

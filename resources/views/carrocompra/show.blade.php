@@ -6,6 +6,8 @@
 	<div class="col-md-12">
 		@include('carrocompra.fragment.error')
 		@include('carrocompra.fragment.success')
+		@include('carrocompra.fragment.info')
+
 		<h3>Carrito de compra</h3>
 		<table class="table">
 			<thead class="thead-dark">
