@@ -76,8 +76,8 @@ Route::resource('cliente', 'ClienteController')->middleware('user');
 | producto.edit   	GET|HEAD 	Muestra formulario editar producto
 */
 Route::resource('producto', 'ProductoController');
-Route::GET('producto.search','ProductoController@search')->middleware('admin')->name('searchProduct');
-Route::GET('producto.removemodal','ProductoController@removeModal')->middleware('admin')->name('productoRemoveModal');
+Route::GET('producto/search','ProductoController@search')->middleware('admin')->name('searchProduct');
+Route::GET('producto/removemodal','ProductoController@removeModal')->middleware('admin')->name('productoRemoveModal');
 Route::get('producto/subcategoria/{id}','ProductoController@productoSubCategoria')->name('productoSubCategoria');
 
 /*
@@ -107,8 +107,8 @@ Route::get('marcarPrincipal/{id}','ImagenController@marcarPrincipal')->middlewar
 | especificacion.edit   	GET|HEAD 	Muestra formulario editar especificacion
 */
 Route::resource('especificacion', 'EspecificacionController')->middleware('admin');
-Route::GET('especificacion.editmodal','EspecificacionController@editModal')->middleware('admin')->name('especificacionEditModal');
-Route::GET('especificacion.removemodal','EspecificacionController@removeModal')->middleware('admin')->name('especificacionRemoveModal');
+Route::GET('especificacion/editmodal','EspecificacionController@editModal')->middleware('admin')->name('especificacionEditModal');
+Route::GET('especificacion/removemodal','EspecificacionController@removeModal')->middleware('admin')->name('especificacionRemoveModal');
 
 /*
 |-------------------------------------------------------------------------
@@ -124,7 +124,7 @@ Route::GET('especificacion.removemodal','EspecificacionController@removeModal')-
 */
 Route::resource('oferta','OfertaController')->middleware('admin');
 Route::get('ofertas/{id}','OfertaController@index')->middleware('admin');
-Route::GET('oferta.removemodal','OfertaController@removeModal')->middleware('admin')->name('ofertaRemoveModal');
+Route::GET('oferta/removemodal','OfertaController@removeModal')->middleware('admin')->name('ofertaRemoveModal');
 
 /*
 |------------------------------------------------------------------------
@@ -149,7 +149,7 @@ Route::get('caja','CarroCompraController@caja')->name('caja');
 Route::post('pagar','VentaController@store')->name('pagar');
 Route::get('resumenVenta/{id_venta}','VentaController@resumenVenta')->name('resumenVenta');
 Route::get('guardarVenta/{id_estado_venta}','VentaController@guardarVenta')->name('guardarVenta');
-
+Route::get('venta/misCompras','VentaController@misCompras')->name('misCompras')->middleware('user');
 /*
 |------------------------------------------------------------------------
 | Rutas Contenedor PayPal

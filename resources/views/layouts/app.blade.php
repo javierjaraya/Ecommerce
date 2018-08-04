@@ -48,16 +48,15 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link active">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link">Ubicación</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link">Contacto</a>
+						<a href="{{ url('/') }}" class="nav-link">Home</a>
 					</li>
 					@guest
 					@else
+					    @if (Auth::user()->id_perfil == 1)
+					    <li class="nav-item">
+							<a href="{{ route('misCompras') }}" class="nav-link">Mis Compras</a>
+						</li>
+					    @endif
 						@if(Auth::user()->id_perfil == 2)
 						<li class="nav-item">
 							<a href="{{ route('producto.index') }}" class="nav-link">Productos</a>

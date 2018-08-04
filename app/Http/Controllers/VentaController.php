@@ -159,4 +159,19 @@ class VentaController extends Controller
 		}
 		return redirect('/');
 	}
+
+	/*
+	* Metodo que retorana una vista con un registro historico de las compras realizadas
+	* por un cliente que tenga su session iniciada.
+	*/
+	public function misCompras(){
+
+		$id_usuario = Auth::id();
+        $cliente = CLiente::idUsuario($id_usuario)->first();
+
+        $misCompras = Venta::idCliente($cliente->id)->orderBy('created_at', 'desc')->paginate(7);
+
+        return view('venta.misCompras')
+        	->with('mis_compras',$misCompras);
+	}
 }

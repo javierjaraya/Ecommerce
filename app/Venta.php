@@ -29,4 +29,13 @@ class Venta extends Model
     public function tipoDespacho() {
         return $this->hasOne('App\TipoDespacho', 'id_tipo_despacho','id_tipo_despacho');
     }
+
+    public function detalle() {
+       return $this->hasMany('App\DetalleVenta','id_venta');//(Tabla relacionada , columna señalada)
+    }
+
+    public function scopeIdCliente($query, $id_cliente){
+        if($id_cliente)
+            return $query->where('id_cliente','=',$id_cliente);
+    }
 }
