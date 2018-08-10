@@ -22,7 +22,7 @@ class ClienteController extends Controller
     	$user = Auth::user();//Obtenemos el usuario auth
     	$id = Auth::id();
 
-    	$objet = DB::table('cliente')->select('id', 'rut','nombres_rason_social', 'apellidos','giro','direccion','id_comuna','contacto','id_usuario')->where('id_usuario','=',$id)->get();    
+    	$objet = DB::table('cliente')->select('id', 'rut','nombres_razon_social', 'apellidos','giro','direccion','id_comuna','contacto','id_usuario')->where('id_usuario','=',$id)->get();    
 
     	//$regiones = Region::all();
     	//$provincias = Provincia::all();

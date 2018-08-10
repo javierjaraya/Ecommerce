@@ -3,7 +3,7 @@
 @section('content')
 		<div class="row">
         @foreach ($productos as $producto)
-        <div class="col-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 			<div class="card mb-3" style="">
 				<div class="card-title text-right pr-1 mb-1">
 					<span class="badge badge-success">

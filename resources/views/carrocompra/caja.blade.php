@@ -23,7 +23,7 @@
 				  <div class="form-group row">
 				    <label for="nombre_retira" class="col-sm-2 col-form-label">Nombre</label>
 				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="nombre_retira" name="nombre_retira" placeholder="Nombre" value="{{ $cliente->nombres_rason_social }}" required>
+				      <input type="text" class="form-control" id="nombre_retira" name="nombre_retira" placeholder="Nombre" value="{{ $cliente->nombres_razon_social }}" required>
 				      <div class="invalid-feedback">
 				        Por favor ingrese su nombre o razon social
 				      </div>

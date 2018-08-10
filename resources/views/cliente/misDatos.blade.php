@@ -35,11 +35,11 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="nombres_rason_social" class="col-sm-3 col-form-label">Nombre o rason social</label>
+							<label for="nombres_razon_social" class="col-sm-3 col-form-label">Nombre o razon social</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="nombres_rason_social" name="nombres_rason_social" placeholder="Nombre o rason social" value="{{ $cliente->nombres_rason_social }}" required>
+								<input type="text" class="form-control" id="nombres_razon_social" name="nombres_razon_social" placeholder="Nombre o razon social" value="{{ $cliente->nombres_razon_social }}" required>
 								<div class="invalid-feedback">
-							          Por favor ingrese su nombre o rason social
+							          Por favor ingrese su nombre o razon social
 							        </div>
 							</div>
 						</div>

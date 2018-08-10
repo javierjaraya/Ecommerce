@@ -11,10 +11,19 @@ use App\DetalleVenta;
 use Illuminate\Support\Facades\Auth;//Para acceder al auth
 use Illuminate\Support\Facades\DB;
 use Session;
+//use Mail;
+use App\Mail\Email;
+use Illuminate\Support\Facades\Mail;
 
 class VentaController extends Controller
 {
-    //
+    
+    public function index(){
+        $ventas = Venta::orderBy('created_at', 'desc')->paginate(7);
+
+        return view('venta.index')
+        	->with('ventas',$ventas);
+    }
 
     public function store(Request $request){
 
@@ -50,7 +59,7 @@ class VentaController extends Controller
 	            	return redirect('payment');
 	        	}else if($request->id_medio_pago == 3){
 	        		//Pago por transferencia 
-	        		return \Redirect::route('guardarVenta',[6]);
+	        		return \Redirect::route('guardarVenta',[2]);//2 = pago pendiente
 	        	}
 
 	        }else{
@@ -86,15 +95,11 @@ class VentaController extends Controller
     	    );
 
             $info = "";
-    	    if($id_estado_venta == 6){
+    	    if($id_estado_venta == 2){
     	    	$info = "Pago pendiente....";
     	    }else{
     	    	$info = "Pago realizado correctamente";
     	    }
-
-    	    //Lista productos venta 
-            $productosVenta = array();
-            $totalVenta = 0;
 
             foreach ($detalleCarro as $detalle) {
             	//Comprobar los stock de los productos
@@ -112,20 +117,14 @@ class VentaController extends Controller
             				'id_venta' => $newVenta->id_venta,
             			]
             		);
-            		$totalVenta += $detalle->precio;
 
-            		$productosVenta[] = $newDetalleVenta;
             		//Quitamos el producto del carro
             		$detalle->delete();
             	}
             }
 
             //Visualizar vista resumen venta (Con las etapas futuras señalando la actual)
-            return view('venta.resumenVenta')
-	            ->with('info',$info)
-	            ->with('venta',$newVenta)
-	            ->with('detalleVenta',$productosVenta)
-	            ->with('totalVenta',$totalVenta);
+	        return \Redirect::route('resumenVenta',[$newVenta->id_venta]);
 
 		}
 		return view('auth.login');
@@ -165,7 +164,6 @@ class VentaController extends Controller
 	* por un cliente que tenga su session iniciada.
 	*/
 	public function misCompras(){
-
 		$id_usuario = Auth::id();
         $cliente = CLiente::idUsuario($id_usuario)->first();
 
@@ -173,5 +171,89 @@ class VentaController extends Controller
 
         return view('venta.misCompras')
         	->with('mis_compras',$misCompras);
+	}
+
+	public function detalleVenta($id_venta){
+
+		$venta = Venta::find($id_venta);
+		$cliente = Cliente::find($venta->id_cliente);
+		$detalleVenta = DetalleVenta::idVenta($id_venta)->get();
+
+		$totalVenta = 0;
+
+		$temp = DB::select('select sum(precio*cantidad) as total from detalle_venta where id_venta = ? ', 
+			[$venta->id_venta]);
+
+		$totalVenta = $temp[0]->total;
+
+		return view('venta.detalleVenta')
+		    ->with('venta',$venta)
+		    ->with('detalleVenta',$detalleVenta)
+		    ->with('totalVenta',$totalVenta)
+		    ->with('cliente',$cliente);
+	}
+
+	public function confirmarPago($id_venta){
+		$venta = Venta::find($id_venta);
+		$venta->id_estado_venta = 3;
+		$venta->save();
+
+		$cliente = Cliente::find($venta->id_cliente);
+
+		//Enviar correo informado que el pago se a validado
+		
+
+		return \Redirect::route('detalleVenta',[$venta->id_venta])
+			->with('success','Pago confirmado');
+	}
+
+	public function confirmarOrden($id_venta){
+		$venta = Venta::find($id_venta);
+		$venta->id_estado_venta = 4;
+		$venta->save();
+
+		return \Redirect::route('detalleVenta',[$venta->id_venta])
+			->with('success','Orden confirmada');
+	}
+
+	public function listaParaRetirar($id_venta){
+		$venta = Venta::find($id_venta);
+		$venta->id_estado_venta = 5;
+		$venta->save();
+
+		return \Redirect::route('detalleVenta',[$venta->id_venta])
+			->with('success','Orden lista para retirar');
+	}
+
+	public function compraEntregada($id_venta){
+		$venta = Venta::find($id_venta);
+		$venta->id_estado_venta = 6;
+		$venta->save();
+
+		//Informar al cliente por email que la compra fue entregada
+		$cliente = Cliente::find($venta->id_cliente);
+
+		$email = new \stdClass();
+        $email->demo_one = 'Demo One Value';
+        $email->demo_two = 'Demo Two Value';
+        $email->sender = 'SenderUserName';
+        $email->receiver = 'ReceiverUserName';
+ 
+        Mail::to("javier.jara.ya@gmail.com")->send(new Email($email));
+
+		return \Redirect::route('detalleVenta',[$venta->id_venta])
+			->with('success','Compra entregada');
+	}
+
+	public function anularCompra($id_venta){
+		$venta = Venta::find($id_venta);
+		$venta->id_estado_venta = 1;
+		$venta->save();
+
+		//Liberar stock
+		//Informar al cliente por email que la compra fue anulada
+
+		return \Redirect::route('detalleVenta',[$venta->id_venta])
+			->with('success','Compra anulada');
 	}
 }

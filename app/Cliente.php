@@ -13,7 +13,7 @@ class Cliente extends Model {
      * @var array
      */
     protected $fillable = [
-        'id', 'rut','nombres_rason_social', 'apellidos','giro','direccion','id_comuna','contacto','	id_usuario'
+        'id', 'rut','nombres_razon_social', 'apellidos','giro','direccion','id_comuna','contacto','	id_usuario'
     ];
 
     // Relación uno a uno

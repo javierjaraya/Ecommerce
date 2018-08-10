@@ -55,7 +55,7 @@ CREATE TABLE `categoria` (
 CREATE TABLE `cliente` (
   `id` int(11) NOT NULL,
   `rut` varchar(45) DEFAULT NULL,
-  `nombres_rason_social` varchar(255) DEFAULT NULL,
+  `nombres_razon_social` varchar(255) DEFAULT NULL,
   `apellidos` varchar(50) DEFAULT NULL,
   `giro` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,

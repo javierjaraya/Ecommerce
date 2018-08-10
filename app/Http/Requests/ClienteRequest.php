@@ -26,7 +26,7 @@ class ClienteRequest extends FormRequest
         return [
             //'id' => 'required',
             'rut' => 'required',
-            'nombres_rason_social' => 'required',
+            'nombres_razon_social' => 'required',
             //'apellidos' => 'required',
             //'giro' => 'required',
             'direccion' => 'required',

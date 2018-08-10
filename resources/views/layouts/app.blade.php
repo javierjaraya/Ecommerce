@@ -26,6 +26,10 @@
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet">
 
     
+	<!-- Progress-Bar -->
+	<link href="{{ asset('progress-bar/main.css') }}" rel="stylesheet">
+
+
 <!-- PARA EL SELECT DE COMUNA Jquery da comflicto-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -62,7 +66,7 @@
 							<a href="{{ route('producto.index') }}" class="nav-link">Productos</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link">Ventas</a>
+							<a href="{{ route('ventas') }}" class="nav-link">Ventas</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link">Ventas Anuladas</a>
@@ -84,10 +88,10 @@
 				  	@else
 				  		<li class="nav-item dropdown">
 	                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-	                        	@if ($cliente == null || $cliente->nombres_rason_social == '')
+	                        	@if ($cliente == null || $cliente->nombres_razon_social == '')
 	                        		{{ Auth::user()->email}} 
 	                        	@else
-	                        		{{ $cliente->nombres_rason_social.' '.$cliente->apellidos }} 
+	                        		{{ $cliente->nombres_razon_social.' '.$cliente->apellidos }} 
 	                        	@endif
 
 	                            <span class="caret"></span>

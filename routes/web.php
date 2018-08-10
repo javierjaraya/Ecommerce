@@ -44,6 +44,9 @@ Route::get('/subcategorias/{id_categoria?}','SubCategoriaController@listadoByCat
 Route::get('/test',function(){
 	return view('prueba');
 });
+Route::get('/email',function(){
+	return view('mails.email_prueba');
+});
 
 /*
 * Busqueda
@@ -150,6 +153,14 @@ Route::post('pagar','VentaController@store')->name('pagar');
 Route::get('resumenVenta/{id_venta}','VentaController@resumenVenta')->name('resumenVenta');
 Route::get('guardarVenta/{id_estado_venta}','VentaController@guardarVenta')->name('guardarVenta');
 Route::get('venta/misCompras','VentaController@misCompras')->name('misCompras')->middleware('user');
+Route::get('ventas','VentaController@index')->name('ventas')->middleware('admin');
+Route::get('detalleVenta/{id_venta}','VentaController@detalleVenta')->name('detalleVenta')->middleware('admin');
+
+Route::get('confirmarPago/{id_venta}','VentaController@confirmarPago')->name('confirmarPago')->middleware('admin');
+Route::get('confirmarOrden/{id_venta}','VentaController@confirmarOrden')->name('confirmarOrden')->middleware('admin');
+Route::get('listaParaRetirar/{id_venta}','VentaController@listaParaRetirar')->name('listaParaRetirar')->middleware('admin');
+Route::get('compraEntregada/{id_venta}','VentaController@compraEntregada')->name('compraEntregada')->middleware('admin');
+Route::get('anularCompra/{id_venta}','VentaController@anularCompra')->name('anularCompra')->middleware('admin');
 /*
 |------------------------------------------------------------------------
 | Rutas Contenedor PayPal

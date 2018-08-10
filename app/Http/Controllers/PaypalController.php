@@ -165,7 +165,7 @@ class PaypalController extends Controller
 
 
 		if ($result->getState() == 'approved') {
-			return \Redirect::route('guardarVenta',[1]);
+			return \Redirect::route('guardarVenta',[3]);//3 = Pago Aprobado y Solicitud recibida
 		}
 		return \Redirect::route('carroCompra')
 			->with('info', 'La compra fue cancelada');

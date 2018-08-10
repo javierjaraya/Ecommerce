@@ -25,6 +25,12 @@
 				<hr>
 
 				<div class="row">
+					<div class="col-sm-12">
+						@include('venta.fragment.progress-bar')
+					</div>
+				</div>
+
+				<div class="row">
 					<div class="col-sm-12 p-4">
 						@if (isset($detalleVenta))
 							<h4>{{ $venta->tipoDespacho->tipo_despacho }}</h4>
@@ -39,6 +45,7 @@
 							    </div>
 								<div class="col-6 col-sm-6 col-md-10 pt-4">
 									{{ $detalle->producto->nombre }}<br>
+									SKU {{ $detalle->producto->id }}<br>
 									$ {{ number_format($detalle->precio) }}<br>
 									{{ $detalle->cantidad }} Unidad<br>
 								</div>
@@ -51,34 +58,7 @@
 
 				</div>
 
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="row mt-5">
-							<div class="col-sm-12 pl-5 pr-5">
-								<div class="progress ml-4 mr-4">
-								  <div class="progress-bar w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row mb-5">
-							<div class="col-sm-3">
-								Solicitud recibida
-							</div>
-							<div class="col-sm-3">
-								Orden confirmada
-							</div>
-							<div class="col-sm-3">
-								Orden lista para retirar
-							</div>
-							<div class="col-sm-3 text-right">
-								Orden entregada
-							</div>
-						</div>
-					</div>
-				</div>
-
-				@if ($venta->id_estado_venta == 6)
+				@if ($venta->id_estado_venta == 2 || $venta->id_estado_venta == 1)
 					<div class="row">
 						@include('venta.fragment.infoTransferencia')
 					</div>
