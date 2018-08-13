@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Usuario;
 use App\Cliente;
 use App\CarroCompra;
 use App\DetalleCarroCompra;
@@ -199,8 +200,17 @@ class VentaController extends Controller
 		$venta->save();
 
 		$cliente = Cliente::find($venta->id_cliente);
+		$usuario = Usuario::find($cliente->id_usuario);
 
 		//Enviar correo informado que el pago se a validado
+		$email = new \stdClass();
+        $email->destinatario = $usuario->email;
+        $email->asunto = 'Pago validado';
+        $email->nombre_cliente = $cliente->nombres_razon_social;
+        $email->id_estado_venta = $venta->id_estado_venta;
+        $email->numero_orden = $venta->id_venta;
+ 
+        Mail::to($usuario->email)->send(new Email($email));
 		
 
 		return \Redirect::route('detalleVenta',[$venta->id_venta])
@@ -230,16 +240,18 @@ class VentaController extends Controller
 		$venta->id_estado_venta = 6;
 		$venta->save();
 
-		//Informar al cliente por email que la compra fue entregada
 		$cliente = Cliente::find($venta->id_cliente);
+		$usuario = Usuario::find($cliente->id_usuario);
 
+		//Informar al cliente por email que la compra fue entregada
 		$email = new \stdClass();
-        $email->demo_one = 'Demo One Value';
-        $email->demo_two = 'Demo Two Value';
-        $email->sender = 'SenderUserName';
-        $email->receiver = 'ReceiverUserName';
+        $email->destinatario = $usuario->email;
+        $email->asunto = 'Pedido Entregado';
+        $email->nombre_cliente = $cliente->nombres_razon_social;
+        $email->id_estado_venta = $venta->id_estado_venta;
+        $email->numero_orden = $venta->id_venta;
  
-        Mail::to("javier.jara.ya@gmail.com")->send(new Email($email));
+        Mail::to($usuario->email)->send(new Email($email));
 
 		return \Redirect::route('detalleVenta',[$venta->id_venta])
 			->with('success','Compra entregada');

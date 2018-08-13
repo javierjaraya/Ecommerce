@@ -31,14 +31,14 @@ class Email extends Mailable
      */
     public function build()
     {
-        return $this->from('javier.jara.ya@gmail.com')
-                    ->view('mails.email')
-                    ->text('mails.email_plain')
-                    ->with(
+        return $this->from($this->email->destinatario)//Destinatario
+                    ->view('mails.email_pedido_entregado')//Texto html
+                    ->text('mails.email_plain');//Texto plano
+                    /*->with(
                       [
                             'testVarOne' => '1',
                             'testVarTwo' => '2',
-                      ]);
+                      ]);*/
                       /*->attach(public_path('/images').'/demo.jpg', [
                               'as' => 'demo.jpg',
                               'mime' => 'image/jpeg',

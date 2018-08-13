@@ -1,15 +1,10 @@
-Hello {{ $email->receiver }},
-This is a demo email for testing purposes! Also, it's the HTML version.
+Hola {{ $email->nombre_cliente }},
  
-Demo object values:
+Este es un email de prueba por el testing de envio, No es la version HTML.
+
+Numero Pedido: {{ $email->numero_orden }}
+Estado pedido: {{ $email->asunto }}
  
-Demo One: {{ $email->demo_one }}
-Demo Two: {{ $email->demo_two }}
- 
-Values passed by With method:
- 
-testVarOne: {{ $testVarOne }}
-testVarOne: {{ $testVarOne }}
- 
-Thank You,
-{{ $email->sender }}
+Gracias,
+
+Web Ecommerce

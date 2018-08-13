@@ -45,7 +45,7 @@ Route::get('/test',function(){
 	return view('prueba');
 });
 Route::get('/email',function(){
-	return view('mails.email_prueba');
+	return view('mails.email_pedido_entregado');
 });
 
 /*
