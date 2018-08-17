@@ -82,9 +82,6 @@
     </div>
 </div>
 
-
-
-
 @include('producto.modal.modalConfirmacionProducto')
 
 

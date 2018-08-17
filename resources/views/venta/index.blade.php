@@ -8,7 +8,7 @@
 <h4><b>Ventas</b></h4>
 
 @foreach ($ventas as $venta)
-<div class="row mb-3">
+<div class="row">
 	<div class="col-12">
 	  <div class="card">
         <div class="card-body">

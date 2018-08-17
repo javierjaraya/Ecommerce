@@ -9,7 +9,7 @@
 		@include('venta.fragment.error')
 		@include('venta.fragment.success')
 		@include('venta.fragment.info')
-		<div class="col-sm-12 mb-3">
+		<div class="col-sm-12">
 			<div class="card">
 			  <div class="card-header">
 			    Resumen Venta
