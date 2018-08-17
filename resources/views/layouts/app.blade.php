@@ -29,6 +29,9 @@
 	<!-- Progress-Bar -->
 	<link href="{{ asset('progress-bar/main.css') }}" rel="stylesheet">
 
+	<!-- Breadcrumbs -->
+	<link href="{{ asset('css/breadcrumbs.css') }}" rel="stylesheet">
+
 
 <!-- PARA EL SELECT DE COMUNA Jquery da comflicto-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>   
@@ -196,7 +199,7 @@
 		                @yield('breadcrumbs')
 		            </section>
 		            
-					<section>					
+					<section class="pb-3">					
 
 					@yield('content')
 
