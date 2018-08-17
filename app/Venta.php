@@ -38,4 +38,9 @@ class Venta extends Model
         if($id_cliente)
             return $query->where('id_cliente','=',$id_cliente);
     }
+
+    public function scopeIdEstadoVenta($query, $id_estado_venta){
+        if($id_estado_venta)
+            return $query->where('id_estado_venta','=',$id_estado_venta);
+    }
 }

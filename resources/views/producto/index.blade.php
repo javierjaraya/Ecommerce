@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('productos') }}
+@endsection
+
 @section('content')
 
 
@@ -64,11 +68,7 @@
 							<button type="button" class="btn btn-danger bt-sm" onclick="modalEliminarProducto({{ $producto->id }})"  title="Eliminar producto"><i class="far fa-trash-alt"></i></button>
 						</td>
 						<td width="55px">
-							<form action="{{ route('oferta.index') }}" method="GET">
-				                @csrf
-				                <input type="hidden" name="idProducto" value="{{ $producto->id }}">
-				                <button type="submit" class="btn btn-success bt-sm" title="Ofertas producto"><i class="fas fa-tags"></i></button>
-				            </form>
+							<a href="{{ route('oferta.index', [$producto->id]) }}" class="btn btn-success bt-sm" title="Ofertas producto"><i class="fas fa-tags"></i></a>
 						</td>
 					</tr>
 				@endforeach

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('resultadoBusqueda') }}
+@endsection
+
 @section('content')
 
 		@include('busqueda.fragment.error')

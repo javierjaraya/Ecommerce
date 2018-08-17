@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', 'ProductoController@productosOferta');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProductoController@productosOferta')->name('home');
 
 /**
  * Permisos usuario administrador
@@ -79,6 +79,11 @@ Route::resource('cliente', 'ClienteController')->middleware('user');
 | producto.edit   	GET|HEAD 	Muestra formulario editar producto
 */
 Route::resource('producto', 'ProductoController');
+//Route::GET('productos','ProductoController@index')->name('productos')->middleware('admin');
+//Route::GET('productos/create','ProductoController@create')->name('createProducto')->middleware('admin');
+
+
+
 Route::GET('producto/search','ProductoController@search')->middleware('admin')->name('searchProduct');
 Route::GET('producto/removemodal','ProductoController@removeModal')->middleware('admin')->name('productoRemoveModal');
 Route::get('producto/subcategoria/{id}','ProductoController@productoSubCategoria')->name('productoSubCategoria');
@@ -125,9 +130,14 @@ Route::GET('especificacion/removemodal','EspecificacionController@removeModal')-
 | Oferta.destroy 	DELETE 		Elimina una oferta
 | Oferta.edit   	GET|HEAD 	Muestra formulario editar oferta
 */
-Route::resource('oferta','OfertaController')->middleware('admin');
-Route::get('ofertas/{id}','OfertaController@index')->middleware('admin');
-Route::GET('oferta/removemodal','OfertaController@removeModal')->middleware('admin')->name('ofertaRemoveModal');
+//Route::resource('oferta','OfertaController')->middleware('admin');
+
+Route::get('ofertas/{id}','OfertaController@index')->name('oferta.index')->middleware('admin');
+Route::post('ofertas/store','OfertaController@store')->name('oferta.store')->middleware('admin');
+Route::get('ofertas/create/{id_producto}','OfertaController@create')->name('oferta.create')->middleware('admin');
+Route::put('ofertas/update/{id_oferta}','OfertaController@update')->name('oferta.update')->middleware('admin');
+Route::get('ofertas/{id_oferta}/edit','OfertaController@edit')->name('oferta.edit')->middleware('admin');
+Route::post('ofertas/destroy','OfertaController@removeModal')->name('oferta.destroy')->middleware('admin');
 
 /*
 |------------------------------------------------------------------------
@@ -152,9 +162,20 @@ Route::get('caja','CarroCompraController@caja')->name('caja');
 Route::post('pagar','VentaController@store')->name('pagar');
 Route::get('resumenVenta/{id_venta}','VentaController@resumenVenta')->name('resumenVenta');
 Route::get('guardarVenta/{id_estado_venta}','VentaController@guardarVenta')->name('guardarVenta');
-Route::get('venta/misCompras','VentaController@misCompras')->name('misCompras')->middleware('user');
-Route::get('ventas','VentaController@index')->name('ventas')->middleware('admin');
+Route::get('misCompras','VentaController@misCompras')->name('misCompras')->middleware('user');
 Route::get('detalleVenta/{id_venta}','VentaController@detalleVenta')->name('detalleVenta')->middleware('admin');
+Route::get('ventas/{id_estado_venta}','VentaController@index')->name('ventas')->middleware('admin');
+
+
+//Ruta para ver compras anuladas
+//Ruta para ver compras listas para retirar
+//Ruta para ver compras Confirmadas //En preparacion
+//Ruta para ver nuevas compras //Pendientes por confirmar
+//Ruta para ver compras Pendientes por pagar
+//Ruta para ver compras entregadas
+
+//Ruta general para obtener compras segun su estado 
+
 
 Route::get('confirmarPago/{id_venta}','VentaController@confirmarPago')->name('confirmarPago')->middleware('admin');
 Route::get('confirmarOrden/{id_venta}','VentaController@confirmarOrden')->name('confirmarOrden')->middleware('admin');

@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('login') }}
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Iniciar Sessión') }}</div>
 
@@ -61,6 +65,22 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">¿Todavía no has creado tu cuenta?</div>
+
+                <div class="card-body">
+                    <h5 class="card-title">Al registrarte podrás beneficiarte de:</h5>
+                    <p class="card-text">
+                        Realizar compras online<br>
+                        Un completo seguimiento de tus pedidos<br>
+                        El historial de las compras que has realizado<br>
+                    </p>
+                    <a class="btn btn-primary" href="{{ route('register') }}">Registrate</a>
                 </div>
             </div>
         </div>

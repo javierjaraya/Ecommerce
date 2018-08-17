@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('carroCompra') }}
+@endsection
+
 @section('content')
 
 <div class="row">

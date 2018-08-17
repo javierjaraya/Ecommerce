@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('misDatos') }}
+@endsection
+
 @section('content')
 
 

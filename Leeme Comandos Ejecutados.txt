@@ -50,3 +50,4 @@ php artisan make:model DetalleVenta
 composer require paypal/rest-api-sdk-php		Instalar api de Paypal
 php artisan make:controller PaypalController
 php artisan make:mail Email						Clase para enviar los email en app/Mail/Email.php
+composer require davejamesmiller/laravel-breadcrumbs:5.x	Instalar el paquete generador de los breadcrumbs

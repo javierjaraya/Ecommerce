@@ -11,9 +11,12 @@
           <h3>¿Esta seguro que quiere eliminar la oferta?</h3>    
         </div>
         <div class="modal-footer">
-          <input type="hidden" name="id" id="idOfertaModalConfirmacion" value="">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" onclick="confirmarEliminacionOferta()" class="btn btn-danger">Eliminar</button>
+          <form action="{{ route('oferta.destroy') }}" method="post">
+            @csrf
+            <input type="hidden" name="id" id="idOfertaModalConfirmacion" value="">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <input type="submit" class="btn btn-danger" value="Eliminar">
+          </form>
         </div>
     </div>
   </div>

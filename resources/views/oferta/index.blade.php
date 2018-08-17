@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('ofertas',$idProducto) }}
+@endsection
+
 @section('content')
 
 
 <div class="container">
 	<div class="row mb-2">
 		<div class="col-md-3">
-			<form action="{{ route('oferta.create') }}" method="GET">
-                @csrf
-                <input type="hidden" name="idProducto" value="{{ $idProducto }}">
-                <button type="submit" class="btn btn-danger">Nuevo</button>
-            </form>
+            <a class="btn btn-danger" href="{{ route('oferta.create',[$idProducto]) }}">Nuevo</a>
 		</div>
 		<div class="col-md-5">
 
@@ -70,20 +70,6 @@
 function modalEliminarOferta(id) {
     $('#idOfertaModalConfirmacion').val(id);
     $('#modalConfirmacionOferta').modal('show');
-}
-
-function confirmarEliminacionOferta(){
-    $.ajax({
-        url: '{{ route('ofertaRemoveModal') }}',
-        data: {
-            'id': $('#idOfertaModalConfirmacion').val(),
-        },
-        type: 'GET',
-        success: function(data) {
-            $('#modalConfirmacionOferta').modal('hide');
-            location.reload();
-        }
-    });
 }
 
 </script>

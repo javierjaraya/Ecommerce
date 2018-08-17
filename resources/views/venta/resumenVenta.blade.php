@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('resumenVenta',$venta) }}
+@endsection
+
 @section('content')
 	<div class="row">
 		@include('venta.fragment.error')

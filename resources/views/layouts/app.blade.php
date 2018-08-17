@@ -57,19 +57,27 @@
 					@guest
 					@else
 					    @if (Auth::user()->id_perfil == 1)
-					    <li class="nav-item">
-							<a href="{{ route('misCompras') }}" class="nav-link">Mis Compras</a>
+					    <li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mis Compras</a>
+							<div class="dropdown-menu">
+								<a href="{{ route('misCompras') }}" class="dropdown-item">Estado de mis Compras</a>
+							</div>
 						</li>
 					    @endif
 						@if(Auth::user()->id_perfil == 2)
 						<li class="nav-item">
 							<a href="{{ route('producto.index') }}" class="nav-link">Productos</a>
 						</li>
-						<li class="nav-item">
-							<a href="{{ route('ventas') }}" class="nav-link">Ventas</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link">Ventas Anuladas</a>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Ventas</a>
+							<div class="dropdown-menu">
+						      <a href="{{ route('ventas',[1]) }}" class="dropdown-item">Ventas Anuladas</a>
+						      <a href="{{ route('ventas',[2]) }}" class="dropdown-item">Con pago pendiente</a>
+						      <a href="{{ route('ventas',[3]) }}" class="dropdown-item">Orden de Compra recibida</a>
+						      <a href="{{ route('ventas',[4]) }}" class="dropdown-item">Confirmadas</a>
+						      <a href="{{ route('ventas',[5]) }}" class="dropdown-item">Listas para retirar</a>
+						      <a href="{{ route('ventas',[6]) }}" class="dropdown-item">Entregadas</a>
+						    </div>
 						</li>
 						@endif	
 					@endguest
@@ -184,6 +192,10 @@
 
 				<!-- Div Contenido Pagina-->
 				<div class=" col-sm-8 col-md-9 col-lg-10">
+					<section>
+		                @yield('breadcrumbs')
+		            </section>
+		            
 					<section>					
 
 					@yield('content')

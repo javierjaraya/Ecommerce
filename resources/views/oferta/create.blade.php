@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('crearOferta',$producto->id) }}
+@endsection
+
 @section('content')
 
 
@@ -24,7 +28,7 @@
                         <div class="form-group row">
                             <label for="id_producto" class="col-sm-3 col-form-label">Codigó Producto</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" id="id_producto" name="id_producto"value="{{ $idProducto }}" readonly>
+                                <input type="number" class="form-control" id="id_producto" name="id_producto"value="{{ $producto->id }}" readonly>
                             </div>
                         </div>
 

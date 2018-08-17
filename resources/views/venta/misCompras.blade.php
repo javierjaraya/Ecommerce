@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('misCompras') }}
+@endsection
+
 @section('content')
 <h4><b>Compras</b></h4>
 
@@ -10,8 +14,19 @@
         <div class="card-body">
         	<div class="row">
         		<div class="col-12">
-        			<h5><b>{{ $compra->estadoVenta->estado_venta }}</b></h5>
-        			<p>Compra realizada el {{ $compra->created_at }}</p>
+        			<div class="row">
+        				<div class="col-6">
+        					<h5><b>{{ $compra->estadoVenta->estado_venta }}</b></h5>
+        				</div>
+        				<div class="col-6 text-right">
+        					<p>Compra realizada el {{ $compra->created_at }}</p>
+        				</div>
+        			</div>
+        			<div class="row">
+        				<div class="col-12">
+        					<h6><b>Numero de orden: {{ $compra->id_venta }}</b></h6>
+        				</div>
+        			</div>
         		</div>
         	</div>
         	<div class='row'>

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('ventas',$estadoVenta) }}
+@endsection
+
 @section('content')
 <h4><b>Ventas</b></h4>
 

@@ -232,7 +232,7 @@ class ProductoController extends Controller {
             ->where('imagen.es_principal','=','1')
             ->get();
 
-        return view('welcome')
+        return view('home')
         ->with('productos',$productos);
     }
 

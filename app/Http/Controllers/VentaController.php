@@ -8,7 +8,9 @@ use App\Cliente;
 use App\CarroCompra;
 use App\DetalleCarroCompra;
 use App\Venta;
+use App\EstadoVenta;
 use App\DetalleVenta;
+use App\Producto;
 use Illuminate\Support\Facades\Auth;//Para acceder al auth
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -19,11 +21,13 @@ use Illuminate\Support\Facades\Mail;
 class VentaController extends Controller
 {
     
-    public function index(){
-        $ventas = Venta::orderBy('created_at', 'desc')->paginate(7);
+    public function index($id_estado_venta){
+        $ventas = Venta::IdEstadoVenta($id_estado_venta)->orderBy('created_at', 'desc')->paginate(7);
+        $estadoVenta = EstadoVenta::find($id_estado_venta);
 
         return view('venta.index')
-        	->with('ventas',$ventas);
+        	->with('ventas',$ventas)
+        	->with('estadoVenta',$estadoVenta);
     }
 
     public function store(Request $request){
@@ -263,7 +267,26 @@ class VentaController extends Controller
 		$venta->save();
 
 		//Liberar stock
+		$detalleVenta = DetalleVenta::idVenta($id_venta)->get();
+
+		foreach ($detalleVenta as $detalle) {
+			$producto = Producto::find($detalle->id_producto);
+			$producto->stock += $detalle->cantidad;
+			$producto->save();
+		}
+
+		$cliente = Cliente::find($venta->id_cliente);
+		$usuario = Usuario::find($cliente->id_usuario);
+
 		//Informar al cliente por email que la compra fue anulada
+		$email = new \stdClass();
+        $email->destinatario = $usuario->email;
+        $email->asunto = 'Compra anulada';
+        $email->nombre_cliente = $cliente->nombres_razon_social;
+        $email->id_estado_venta = $venta->id_estado_venta;
+        $email->numero_orden = $venta->id_venta;
+ 
+        Mail::to($usuario->email)->send(new Email($email));
 
 		return \Redirect::route('detalleVenta',[$venta->id_venta])
 			->with('success','Compra anulada');

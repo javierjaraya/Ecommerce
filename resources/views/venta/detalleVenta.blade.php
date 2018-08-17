@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('detalleVenta',$venta) }}
+@endsection
+
 @section('content')
-
-
-
 
 	<div class="row">
 
@@ -150,22 +151,39 @@
 						<a href="#" class="btn btn-success text-light disabled "><i class="fas fa-hand-holding-usd"></i>  Confirmar Pago</a>
 						@endif
 					</div>
+					@if($venta->id_estado_venta == 1)
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('confirmarOrden',[$venta->id_venta]) }}" class="btn btn-light disabled"><i class="fas fa-clipboard-check"></i>  Confirmar Orden</a>
+						</div>
 
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
-						<a href="{{ route('confirmarOrden',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-clipboard-check"></i>  Confirmar Orden</a>
-					</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('listaParaRetirar',[$venta->id_venta]) }}" class="btn btn-light disabled"><i class="fas fa-luggage-cart"></i>  Lista para retirar</a>
+						</div>
 
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
-						<a href="{{ route('listaParaRetirar',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-luggage-cart"></i>  Lista para retirar</a>
-					</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('compraEntregada',[$venta->id_venta]) }}" class="btn btn-light disabled"><i class="fas fa-people-carry"></i>  Compra entregada</a>
+						</div>
 
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
-						<a href="{{ route('compraEntregada',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-people-carry"></i>  Compra entregada</a>
-					</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('anularCompra',[$venta->id_venta]) }}" class="btn btn-danger text-light disabled"><i class="fas fa-ban"></i>  Anular Compra</a>
+						</div>
+					@else
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('confirmarOrden',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-clipboard-check"></i>  Confirmar Orden</a>
+						</div>
 
-					<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
-						<a href="{{ route('anularCompra',[$venta->id_venta]) }}" class="btn btn-danger text-light"><i class="fas fa-ban"></i>  Anular Compra</a>
-					</div>
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('listaParaRetirar',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-luggage-cart"></i>  Lista para retirar</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('compraEntregada',[$venta->id_venta]) }}" class="btn btn-light"><i class="fas fa-people-carry"></i>  Compra entregada</a>
+						</div>
+
+						<div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mb-1">
+							<a href="{{ route('anularCompra',[$venta->id_venta]) }}" class="btn btn-danger text-light"><i class="fas fa-ban"></i>  Anular Compra</a>
+						</div>
+					@endif
 
 				</div>
 			  </div>
